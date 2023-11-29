@@ -105,7 +105,7 @@ const NavBar = () => {
                 </Link>
                 <br />
                 <Link
-                  to="/za-ucenike/izvod-iz-pravila-gimnazije"
+                  to="/za-ucenike/uputstvo-za-izradu-maturskih-radova"
                   className="hover:text-blue-400"
                 >
                   Uputstvo za izradu maturskih radova
