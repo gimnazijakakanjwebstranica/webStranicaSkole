@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaFacebookSquare } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 
 const Footer = () => {
   return (
@@ -10,13 +12,11 @@ const Footer = () => {
           <div className="wrapper row4">
             <footer id="footer" className="flex items-center justify-center bg-gray-800 text-white py-8"> 
               <div className="lg:w-1/4 md:w-1/2 p-4">
-                <h1 className="logoname text-4xl font-bold mb-4"><a href="index.html">Gimnazija</a></h1>
+                <h1 className="logoname text-4xl font-bold mb-4">Gimnazija</h1>
                 <ul className="flex space-x-4">
                   <li><FaFacebookSquare /><a className="faicon-facebook" href="https://www.facebook.com/gimn.kakaknj"><i className="fab fa-facebook"></i></a></li>
-                  <li><a className="faicon-google-plus" href="#"><i className="fab fa-google-plus-g"></i></a></li>
-                  <li><a className="faicon-linkedin" href="#"><i className="fab fa-linkedin"></i></a></li>
-                  <li><a className="faicon-twitter" href="#"><i className="fab fa-twitter"></i></a></li>
-                  <li><a className="faicon-vk" href="#"><i className="fab fa-vk"></i></a></li>
+                  <li><FaInstagram /><a className="faicon-instagram" href="#"><i className=""></i></a></li>
+                  <li><SiGmail /><a className="faicon-gmail" href="#"><i className=""></i></a></li>
                 </ul>
               </div>
               <div className="lg:w-1/4 md:w-1/2 p-4">
@@ -42,10 +42,10 @@ const Footer = () => {
 
         {/* Kreator stranice */}
         <div className="lg:w-1/4 md:w-1/2 p-4">
-          <h6 className="text-xl font-semibold mb-2">Kreator stranice</h6>
+          <h6 className="text-xl font-semibold mb-2 right-4">Kreator stranice</h6>
           <ul className="list-none p-0 m-0">
             <li className="mb-2">
-              <p className="mb-4">&copy; Mirza Hodzic</p>
+              <p>&copy; Mirza Hodzic</p>
               <p className="mb-4">&copy; Nedim Neimarlija</p>
             </li>
             <li>
