@@ -1,7 +1,10 @@
-
+import NavBar from "../../components/NavBar"
 const Sekcije = () => {
+
   return (
-    <div>Sekcije</div>
+    <div>
+      <NavBar/>
+      Sekcije</div>
   )
 }
 

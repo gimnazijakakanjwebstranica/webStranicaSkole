@@ -6,8 +6,8 @@ const LoginForm = ({ handleLoginForm }) => {
   const [password, setPassword] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(true);
 
-  const authEmail = "gimnazijakakanj@edu.ba"
-  const authPassword = "gimnazijakakanj@edu.ba";
+  const authEmail = ""
+  const authPassword = "";
 
   const handleLogin = (e) => {
     e.preventDefault();

@@ -32,6 +32,8 @@ import Maturanti from "./pages/o-skoli/Maturanti";
 import UceniciGeneracije from "./pages/o-skoli/UceniciGeneracije";
 import NastavniKalendar from "./pages/o-skoli/NastavniKalendar";
 
+import ArticlePage from "./components/ArticlePage";
+
 function App() {
   const routeResult = useRoutes([
     { path: "/", element: <Home /> },
@@ -93,6 +95,8 @@ function App() {
     { path: "/o-skoli/ucenici-generacije", element: <UceniciGeneracije /> },
     { path: "/o-skoli/nastavni-kalendar", element: <NastavniKalendar /> },
     { path: "/o-skoli/kontakt", element: <Kontakt /> },
+
+    { path: "/novosti/:id", element: <ArticlePage /> },
   ]);
 
   return routeResult;
