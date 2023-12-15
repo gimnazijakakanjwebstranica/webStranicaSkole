@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
       title: req.body.title,
       date: req.body.date,
       body: req.body.body,
-      imagesUrl: req.body.imagesUrl,
+      images: req.body.images,
     };
 
     const article = await Article.create(newArticle);

@@ -1,8 +1,11 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 const RijecDirektora = () => {
-  return (
-    <div>RijecDirektora</div>
-  )
-}
+  return <div>
+    <NavBar />
+  
+    <Footer/>
+  </div>;
+};
 
-export default RijecDirektora
+export default RijecDirektora;

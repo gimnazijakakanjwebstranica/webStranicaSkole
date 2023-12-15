@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import Spinner from "./Spinner";
 import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
+import Footer from "./Footer";
 
 const ArticlePage = () => {
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
+
 
   useEffect(() => {
     setLoading(true);
@@ -22,6 +24,7 @@ const ArticlePage = () => {
         setLoading(false);
       });
   }, []);
+console.log(article.images);
   return (
     <div>
       <NavBar />
@@ -37,10 +40,14 @@ const ArticlePage = () => {
             <p>{article.body}</p>
           </div>
           <div className="p-4">
-            <p>Fotografije:</p>
+              <p>Fotografije:</p>
+              {article.images ? <div>
+                {article.images.map(photo=> <img src={photo}></img>)}
+              </div>:<></>}
           </div>
         </div>
       )}
+      <Footer/>
     </div>
   );
 };

@@ -7,7 +7,7 @@ const articleSchema = mongoose.Schema({
   },
   date: String,
   body: String,
-  imagesUrl: String,
+  images: [String]
 });
 
 export const Article = mongoose.model("Article", articleSchema)

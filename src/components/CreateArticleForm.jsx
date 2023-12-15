@@ -4,34 +4,35 @@ import { FaImages } from "react-icons/fa";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from "buffer";
+Buffer.from("anything", "base64");
 
 const CreateArticleForm = () => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false)
-  
-
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const data = {
-      title:title,
-      date:date,
-      content: content,
-      imagesUrl: images,
+      title: title,
+      date: date,
+      body: content,
+      images: images,
     };
-    setLoading(true)
-    axios.post("http://localhost:5555/novosti", data).then(() => {
-      console.log("Uspjesno");
-      setLoading(false)
-    }).catch((err) => {
-      console.log(err.message);
-      setLoading(false)
-    })
-    
+
+    axios
+      .post("http://localhost:5555/novosti", data)
+      .then(() => {
+        console.log("Uspjesno");
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setLoading(false);
+      });
 
     setTitle("");
     setDate("");
@@ -39,11 +40,23 @@ const CreateArticleForm = () => {
     setImages([]);
   };
 
-  const onDrop = (acceptedFiles) => {
-    setImages(acceptedFiles);
+  const handleDrop = (acceptedFiles) => {
+    acceptedFiles.map((file, index) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        setImages((prevImages) => {
+          const updatedImages = [...prevImages];
+          updatedImages[index] = reader.result;
+          return updatedImages;
+        });
+      };
+
+      reader.readAsDataURL(file);
+    });
   };
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
@@ -95,10 +108,10 @@ const CreateArticleForm = () => {
               <div>
                 <h3 className="font-medium mt-4 mb-2">Ubačene slike:</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {images.map((file, index) => (
+                  {images.map((base64String, index) => (
                     <img
                       key={index}
-                      src={URL.createObjectURL(file)}
+                      src={base64String}
                       alt={`Uploaded ${index}`}
                       className="w-full h-auto rounded-md"
                     />

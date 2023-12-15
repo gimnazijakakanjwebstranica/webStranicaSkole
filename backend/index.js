@@ -3,14 +3,18 @@ import { PORT, mongoDBURL } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
 import articleRoute from "./routes/articleRoute.js"
+import bodyParser from "body-parser"
 
 const app = express();
+
+app.use(bodyParser.json({ limit: '10mb' }));
+
+//za policy
+app.use(cors());
 
 //za koristenje body requestova
 app.use(express.json());
 
-//za policy
-app.use(cors());
 
 app.get("/", (req, res) => {
   console.log(req);

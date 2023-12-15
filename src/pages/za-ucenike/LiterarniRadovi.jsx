@@ -1,9 +1,12 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 
 const LiterarniRadovi = () => {
-  return (
-    <div>LiterarniRadovi</div>
-  )
-}
+  return <div>
+    <NavBar />
 
-export default LiterarniRadovi
+    <Footer/>
+  </div>;
+};
+
+export default LiterarniRadovi;

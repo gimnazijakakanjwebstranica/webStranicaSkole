@@ -1,9 +1,12 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 
 const UputstvoZaMaturskeRadove = () => {
-  return (
-    <div>UputstvoZaMaturskeRadove</div>
-  )
-}
+  return <div>
+    <NavBar />
 
-export default UputstvoZaMaturskeRadove
+    <Footer/>
+  </div>;
+};
+
+export default UputstvoZaMaturskeRadove;

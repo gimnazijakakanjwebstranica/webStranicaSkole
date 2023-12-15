@@ -1,8 +1,11 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 const UceniciGeneracije = () => {
-  return (
-    <div>UceniciGeneracije</div>
-  )
-}
+  return <div>
+    <NavBar />
+  
+    <Footer/>
+  </div>;
+};
 
-export default UceniciGeneracije
+export default UceniciGeneracije;

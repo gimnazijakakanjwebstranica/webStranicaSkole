@@ -10,15 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dplus/images": "^0.5.0",
     "axios": "^1.6.2",
+    "buffer": "^6.0.3",
     "mongoose": "^8.0.3",
     "navigate": "^0.3.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-file-base64": "^1.0.3",
     "react-icons": "^4.12.0",
     "react-loader-spinner": "^6.1.0",
     "react-modal": "^3.16.1",
+    "react-native-image-viewing": "^0.2.2",
     "react-router-dom": "^6.20.0",
     "uuid": "^9.0.1",
     "uuidv4": "^6.2.13"
@@ -34,6 +38,6 @@
     "eslint-plugin-react-refresh": "^0.4.4",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5",
-    "vite": "^5.0.0"
+    "vite": "^5.0.4"
   }
 }
