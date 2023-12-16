@@ -42,7 +42,7 @@ const Footer = () => {
 
         {/* Kreator stranice */}
         <div className="lg:w-1/4 md:w-1/2 p-4">
-          <h6 className="text-xl font-semibold mb-2 right-4">Kreator stranice</h6>
+          <h6 className="text-xl font-semibold mb-2">Kreator stranice</h6>
           <ul className="list-none p-0 m-0">
             <li className="mb-2">
               <p>&copy; Mirza Hodzic</p>
