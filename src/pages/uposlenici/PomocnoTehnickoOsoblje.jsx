@@ -1,8 +1,11 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 const PomocnoTehnickoOsoblje = () => {
-  return (
-    <div>PomocnoTehnickoOsoblje</div>
-  )
-}
+  return <div>
+    <NavBar />
+  
+    <Footer/>
+  </div>;
+};
 
-export default PomocnoTehnickoOsoblje
+export default PomocnoTehnickoOsoblje;

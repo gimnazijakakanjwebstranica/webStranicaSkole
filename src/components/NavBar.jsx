@@ -27,40 +27,42 @@ const NavBar = () => {
     };
   }, []);
 
-  console.log(windowWidth);
+  
   return (
     <div className="font-link">
-      {windowWidth > 1000 ? (
+      {windowWidth > 700 ? (
         <>
-          <div className="flex justify-evenly text-l pt-5 pb-6 p-6 border-b-[1px]">
-            <div className="pt-5 pb-3 p-6 flex align-middle">
-              <div className="p-3 pl-4">
-                <FaPhoneAlt
-                  style={{ color: "blue", fontSize: "20px" }}
-                  className=""
-                />
+          <div className="text-l pt-5 pb-6 p-6 border-b-[1px]">
+            <div className=" flex justify-center ml-[110px] gap-10">
+              <div className="pt-5 pb-3 p-6 flex align-middle">
+                <div className="p-3 pl-4">
+                  <FaPhoneAlt
+                    style={{ color: "blue", fontSize: "20px" }}
+                    className=""
+                  />
+                </div>
+                <div>
+                  <span className="font-bold">Telefon: </span> <br />
+                  <span>032 456 241</span>
+                </div>
               </div>
-              <div>
-                <span className="font-bold">Telefon: </span> <br />
-                <span>032 456 241</span>
-              </div>
-            </div>
 
-            <div className="pt-5 pb-3 p-6 flex justify-center items-center align-middle">
-              <img src={logoOpcine} className="w-auto h-auto" />
-            </div>
-
-            <div className="pt-5 pb-3 p-6 flex align-middle">
-              <div className="p-2 pl-4">
-                <IoIosMail style={{ color: "orange", fontSize: "2em" }} />
+              <div className="pt-5 pb-3 p-6 flex justify-center items-center align-middle">
+                <img src={logoOpcine} className="w-12" />
               </div>
-              <div>
-                <span className="font-bold">Mail: </span> <br />
-                <span>gimnazijakakanj@bih.net.ba</span>
+
+              <div className="pt-5 pb-3 p-6 flex align-middle">
+                <div className="p-2 pl-4">
+                  <IoIosMail style={{ color: "orange", fontSize: "2em" }} />
+                </div>
+                <div>
+                  <span className="font-bold">Mail: </span> <br />
+                  <span>gimnazijakakanj@bih.net.ba</span>
+                </div>
               </div>
             </div>
           </div>
-          <div className=" flex justify-center gap-8 p-4 roudnded text-xl">
+          <div className=" flex justify-center gap-8 max-w-700px sm:text-base md:text-lg lg:text-xl pt-4 pb-4">
             <div className="group relative ">
               <Link to={"/"} className="hover:text-blue-400">
                 <h1>NOVOSTI</h1>
@@ -259,42 +261,42 @@ const NavBar = () => {
         </>
       ) : (
         <>
-          <div className="flex justify-center text-xs pt-2 pb-3 border-b-[1px]">
+          <div className="flex justify-evenly text-xs pt-2 pb-3 border-b-[1px]">
             <div
-              className="pt-6 pb-3 ml-3 text-2xl relative cursor-pointer"
+              className="flex items-center align-middle text-2xl relative cursor-pointer"
               onClick={toggleBurgerMenu}
             >
               <CiMenuBurger style={{ color: "brown" }} />
             </div>
 
-            <div className="pt-5 pb-3 flex align-middle">
-              <div className="pt-2 pr-2 pl-3">
-                <FaPhoneAlt className="text-blue-500 text-sm" />
-              </div>
-              <div className="whitespace-nowrap">
-                <span className="font-bold ">Telefon: </span> <br />
-                <span>032 456 241</span>
-              </div>
-            </div>
-
-            <div className="pt-5 pb-3 pl-3 pr-3 flex justify-center items-center align-middle">
+            <div className="pt-5 pb-3 pl-3 pr-3 text-center flex justify-center items-center align-middle">
               <img src={logoOpcine} className="w-auto h-auto sm:w-[25px]" />
             </div>
 
-            <div className="pt-5 pb-3 flex align-middle">
-              <div className="pt-2 pr-2">
-                <IoIosMail className="text-orange-500 text-base md:text-lg" />
+            <div className="block">
+              <div className="pt-5 pb-3 flex align-middle">
+                <div className="pt-2 pr-2 ">
+                  <FaPhoneAlt className="text-blue-500 text-sm" />
+                </div>
+                <div className="whitespace-nowrap">
+                  <span className="font-bold ">Telefon: </span> <br />
+                  <span>032 456 241</span>
+                </div>
               </div>
-              <div className="whitespace-nowrap">
-                <span className="font-bold">Mail: </span> <br />
-                <span>gimnazijakakanj@bih.net.ba</span>
+
+              <div className="pt-5 pb-3 flex align-middle">
+                <div className="pt-2 pr-2">
+                  <IoIosMail className="text-orange-500 text-base md:text-lg" />
+                </div>
+                <div className="whitespace-nowrap">
+                  <span className="font-bold">Mail: </span> <br />
+                  <span>gimnazijakakanj@bih.net.ba</span>
+                </div>
               </div>
             </div>
+
             <div>
-              <BurgerMenu
-                isOpen={isBurgerMenu}
-                onClose={toggleBurgerMenu}
-              ></BurgerMenu>
+              <BurgerMenu isOpen={isBurgerMenu} onClose={toggleBurgerMenu} />
             </div>
           </div>
         </>

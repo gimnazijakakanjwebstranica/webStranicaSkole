@@ -1,8 +1,11 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 const TerminiVannastavnihAktivnosti = () => {
-  return (
-    <div>TerminiVannastavnihAktivnosti</div>
-  )
-}
+  return <div>
+    <NavBar />
 
-export default TerminiVannastavnihAktivnosti
+    <Footer/>
+  </div>;
+};
+
+export default TerminiVannastavnihAktivnosti;

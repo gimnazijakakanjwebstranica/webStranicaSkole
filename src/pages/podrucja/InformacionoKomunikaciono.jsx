@@ -1,8 +1,11 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 const InformacionoKomunikaciono = () => {
-  return (
-    <div>InformacionoKomunikaciono</div>
-  )
-}
+  return <div>
+    <NavBar />
+  
+    <Footer/>
+  </div>;
+};
 
-export default InformacionoKomunikaciono
+export default InformacionoKomunikaciono;

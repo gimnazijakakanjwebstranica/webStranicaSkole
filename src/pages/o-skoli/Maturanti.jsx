@@ -1,8 +1,11 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 const Maturanti = () => {
-  return (
-    <div>Maturanti</div>
-  )
-}
+  return <div>
+    <NavBar />
+  
+    <Footer/>
+  </div>;
+};
 
-export default Maturanti
+export default Maturanti;

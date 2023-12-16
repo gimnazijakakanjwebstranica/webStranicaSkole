@@ -1,8 +1,11 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 const Kontakt = () => {
-  return (
-    <div>Kontakt</div>
-  )
-}
+  return <div>
+    <NavBar />
+  
+    <Footer/>
+  </div>;
+};
 
-export default Kontakt
+export default Kontakt;

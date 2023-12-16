@@ -1,8 +1,11 @@
-
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 const MatematickoInformaticko = () => {
-  return (
-    <div>MatematickoInformaticko</div>
-  )
-}
+  return <div>
+    <NavBar />
+  
+    <Footer/>
+  </div>;
+};
 
-export default MatematickoInformaticko
+export default MatematickoInformaticko;

@@ -14,12 +14,12 @@ const BurgerMenu = ({ isOpen, onClose }) => {
     return (
       <div
         onClick={handleBackgroundClick}
-        className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-2"
+        className="fixed top-0 left-0 w-full select-none h-full flex justify-center items-center bg-black bg-opacity-50 z-2"
       >
         <div className="bg-white p-4 pt-3 rounded shadow-lg">
           <div className="w-full flex justify-end text-2xl">
             <button onClick={onClose}>
-              <IoCloseSharp style={{color:"red"}}/>
+              <IoCloseSharp style={{ color: "red" }} />
             </button>
           </div>
 
