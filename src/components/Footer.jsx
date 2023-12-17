@@ -5,7 +5,7 @@ import { SiGmail } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <div className="bg-gray-800 text-white py-4 ">
+    <div className="font-link bg-gray-800 text-white py-4 ">
       <div className="container mx-auto flex flex-wrap justify-around">
         {/* Social Links */}
         <div className="lg:w-1/4 md:w-1/2 p-4">
