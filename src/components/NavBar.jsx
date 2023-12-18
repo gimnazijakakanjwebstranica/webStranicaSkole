@@ -8,6 +8,7 @@ import "../index.css";
 import { useState, useEffect } from "react";
 import BurgerMenu from "./BurgerMenu";
 
+
 const NavBar = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isBurgerMenu, setIsBurgerMenu] = useState(false);
