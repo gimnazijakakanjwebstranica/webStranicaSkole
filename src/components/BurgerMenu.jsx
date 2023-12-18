@@ -38,7 +38,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
           </div>
 
           <div className="block pl-3 roudnded text-lg">
-            <div >
+            <div>
               <Link to={"/"} className="hover:text-blue-400">
                 <h1>NOVOSTI</h1>
               </Link>
@@ -57,7 +57,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
                     Sekcije
                   </Link>
                 </li>
-                
+
                 <li>
                   <Link
                     to="/za-ucenike/izvod-iz-pravila-gimnazije"
