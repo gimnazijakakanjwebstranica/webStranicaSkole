@@ -9,6 +9,11 @@ const BurgerMenu = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     setOpenMenu(isOpen);
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
   }, [isOpen]);
     
     const handleBackgroundClick = (e) => {
