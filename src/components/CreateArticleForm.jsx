@@ -3,7 +3,6 @@ import { useDropzone } from "react-dropzone";
 import { FaImages } from "react-icons/fa";
 import axios from "axios";
 import Spinner from "./Spinner";
-import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
 Buffer.from("anything", "base64");
 
@@ -59,7 +58,7 @@ const CreateArticleForm = () => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+    <div className="max-w-md min-w-[350px] p-6 bg-white rounded-md shadow-md">
       <h2 className="text-xl mb-4 font-semibold">Kreiraj novi članak</h2>
       {loading ? (
         <Spinner />

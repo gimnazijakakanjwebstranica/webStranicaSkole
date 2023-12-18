@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import LoginForm from "../components/LoginForm";
 import CreateArticleForm from "../components/CreateArticleForm";
+import ListArticle from "../components/ListArticle";
+import AdminNavBar from "../components/AdminNavBar";
 
 const AdminPanel = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,9 +16,10 @@ const AdminPanel = () => {
       {!isLoggedIn ? (
         <LoginForm handleLoginForm={handleLoginForm} />
       ) : (
-        <div>
+          <div>
+            <AdminNavBar/>
           Admin Panel
-          <CreateArticleForm />
+           
         </div>
       )}
     </div>

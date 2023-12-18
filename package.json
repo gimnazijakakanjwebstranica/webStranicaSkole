@@ -15,14 +15,17 @@
     "mongoose": "^8.0.3",
     "navigate": "^0.3.6",
     "react": "^18.2.0",
+    "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-file-base64": "^1.0.3",
     "react-icons": "^4.12.0",
     "react-loader-spinner": "^6.1.0",
     "react-modal": "^3.16.1",
+    "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-router-dom": "^6.20.0",
-    "react-simple-image-viewer": "^1.2.2"
+    "react-simple-image-viewer": "^1.2.2",
+    "react-slide-menu": "^0.5.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

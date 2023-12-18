@@ -2,7 +2,7 @@ import express from "express";
 import { Article } from "../models/articleModel.js";
 
 const router = express.Router();
-
+//kreiraj clanak
 router.post("/", async (req, res) => {
   try {
     if (!req.body.title || !req.body.date || !req.body.body) {

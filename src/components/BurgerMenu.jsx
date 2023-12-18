@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { IoCloseSharp } from "react-icons/io5";
 import { MdArrowDropDown } from "react-icons/md";
+import { slide as Menu } from "react-burger-menu";
 
 const BurgerMenu = ({ isOpen, onClose }) => {
     

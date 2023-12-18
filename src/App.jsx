@@ -34,6 +34,8 @@ import NastavniKalendar from "./pages/o-skoli/NastavniKalendar";
 
 import ArticlePage from "./components/ArticlePage";
 
+import AdminArticle from "./pages/AdminArticle";
+
 function App() {
   const routeResult = useRoutes([
     { path: "/", element: <Home /> },
@@ -97,6 +99,8 @@ function App() {
     { path: "/o-skoli/kontakt", element: <Kontakt /> },
 
     { path: "/novosti/:id", element: <ArticlePage /> },
+
+    { path: "/admin-panel/admin-clanci", element: <AdminArticle /> },
   ]);
 
   return routeResult;
