@@ -13,11 +13,19 @@ const CreateArticleForm = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const convertToDDMMYYYY = (inputDate) => {
+    const date = new Date(inputDate);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
       title: title,
-      date: date,
+      date: convertToDDMMYYYY(date),
       body: content,
       images: images,
     };
@@ -58,7 +66,7 @@ const CreateArticleForm = () => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
 
   return (
-    <div className="max-w-md min-w-[350px] p-6 bg-white rounded-md shadow-md">
+    <div className="font-link max-w-md min-w-[350px] p-6 bg-white rounded-md shadow-md">
       <h2 className="text-xl mb-4 font-semibold">Kreiraj novi članak</h2>
       {loading ? (
         <Spinner />
@@ -77,7 +85,7 @@ const CreateArticleForm = () => {
           <div>
             <label className="block mb-1 font-medium">Datum:</label>
             <input
-              type="text"
+              type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               placeholder="Unesi datum"

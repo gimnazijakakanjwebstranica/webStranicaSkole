@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "./Spinner";
-import { MdEdit } from "react-icons/md";
+import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { FaLink } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ListArticle = () => {
   const [data, setData] = useState([]);
@@ -54,7 +56,7 @@ const ListArticle = () => {
   return (
     <div>
       {showModal && (
-        <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+        <div className="font-link fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
           <div className="bg-white p-4 rounded-md">
             <p className="mb-4">Da li ste sigurni da želite obrisati članak?</p>
             <div className="flex justify-between">
@@ -77,16 +79,19 @@ const ListArticle = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <table className="border-separate border-spacing-2">
+        <table className="font-link border-separate border-spacing-2">
           <thead className="rounded">
             <tr>
-              <th className="border rounded-md p-1  border-slate-600">ID</th>
+              <th className="border rounded-md p-1  border-slate-600">
+                <MdFormatListNumbered />
+              </th>
               <th className="border rounded-md p-1 border-slate-600 ">
                 Naslov
               </th>
               <th className="border rounded-md p-1 border-slate-600  ">
                 Datum
               </th>
+              <th className="border rounded-md p-1 border-slate-600  ">Link</th>
               <th className="border rounded-md p-1 border-slate-600 ">
                 Operacije
               </th>
@@ -104,6 +109,13 @@ const ListArticle = () => {
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     <p className="p-1">{article.date}</p>
+                  </td>
+                  <td className="border border-slate-700 rounded-md text-center">
+                    <p className="p-1 flex justify-center">
+                      <Link to={`/novosti/${article._id}`}>
+                        <FaLink />
+                      </Link>
+                    </p>
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     <div className="flex justify-center gap-4">

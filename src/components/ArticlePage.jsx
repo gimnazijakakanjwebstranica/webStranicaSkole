@@ -66,9 +66,9 @@ const ArticlePage = () => {
         >
           <div className="p-4">
             <h1 className="text-2xl font-bold pb-2">{article.title}</h1>
-            <p className="text-sm flex align-middle items-center">
+            <p className="text-sm pl-2 flex align-middle items-center">
               <CiClock1 />
-              <p className="pl-2">{article.date}</p>
+              <p className="pl-2 pt-1">{article.date}</p>
             </p>
           </div>
           <div className="text-sm p-4 border-t-[1px] border-white border-b-[1px]">

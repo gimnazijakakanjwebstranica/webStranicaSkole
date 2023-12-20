@@ -80,20 +80,6 @@ const NavBar = () => {
                 </Link>
                 <br />
                 <Link
-                  to="/za-ucenike/literarni-radovi"
-                  className="hover:text-blue-400"
-                >
-                  Literarni radovi
-                </Link>
-                <br />
-                <Link
-                  to="/za-ucenike/likovni-radovi"
-                  className="hover:text-blue-400"
-                >
-                  Likovni radovi
-                </Link>
-                <br />
-                <Link
                   to="/za-ucenike/izvod-iz-pravila-gimnazije"
                   className="hover:text-blue-400"
                 >
