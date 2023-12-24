@@ -21,7 +21,7 @@ const InformacionoKomunikaciono = () => {
         <div className="mb-8 text-center">
           <SubjectHeader title="III RAZRED" />
           <div className="flex flex-wrap justify-center gap-4">
-            {["Bosanski Jezik", "Engleski Jezik", "Njemacki Jezik/Turski Jezik", "Latinski Jezik", "Tjelesni i zdravstveni odgoj", "Vjeronauka", "Sociologija", "Psihologija", "Demkokratija", "Programiranje", "Operativni sistemi", "Web Dizajn", "Sigurnost informacija", "Baze podataka", "Matematika"].map((subject, index) => (
+            {["Bosanski jezik", "Engleski jezik", "Njemački jezik/Turski jezik", "Latinski jezik", "Matematika", "Vjeronauka/Etika", "Tjelesni i zdravstveni odgoj", "Demokratija", "Psihologija", "Sociologija", "Programiranje", "Web dizajn", "Baze podataka", "Sigurnost informacija", "Operativni sistemi"].map((subject, index) => (
               <div key={index} className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                 <table className="min-w-full table-auto">
                   <TableHeader subject={subject} />
@@ -34,7 +34,7 @@ const InformacionoKomunikaciono = () => {
         <div className="mb-8 text-center">
           <SubjectHeader title="IV RAZRED" />
           <div className="flex flex-wrap justify-center gap-4">
-            {["Bosanski Jezik", "Engleski Jezik", "Njemacki Jezik/Turski Jezik", "Latinski Jezik", "Tjelesni i zdravstveni odgoj", "Vjeronauka", "Logika sa filozofijom", "Kultura religija", "Izborni predmet", "Programiranje", "Razvoj mobilnih aplikacija", "Web Dizajn", "Racunarske mreze", "Baze podataka", "Matematika"].map((subject, index) => (
+            {["Bosanski jezik", "Engleski jezik", "Njemački jezik/Turski jezik", "Latinski jezik", "Matematika", "Vjeronauka/Etika", "Tjelesni i zdravstveni odgoj", "Izborni predmet", "Logika s filozofijom", "Kultura reigija", "Programiranje", "Web dizajn", "Baze podataka", "Računarske mreze", "Razvoj mobilnih aplikacija"].map((subject, index) => (
               <div key={index} className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                 <table className="min-w-full table-auto">
                   <TableHeader subject={subject} />

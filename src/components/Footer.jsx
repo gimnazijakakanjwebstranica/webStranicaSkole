@@ -8,10 +8,10 @@ const Footer = () => {
         {/* Kontakt */}
         <div className="p-4">
           <div className="md:w-full">
-            <h6 className="text-xl font-semibold mb-2 left-1 felx items-center">Kontakt</h6>
+            <h6 className="text-xl font-semibold mb-2 left-1 flex items-center">Kontakt</h6>
             <ul className="list-none p-0 m-0 left-1">
               <li className="flex items-center mb-2">
-                <i className="fas fa-map-marker-alt mr-2"></i>
+                <p className="fas fa-map-marker-alt mr-2"></p>
                 <address>
                   Ulica šehida 32, Kakanj <br />
                   Kakanj, 72240
