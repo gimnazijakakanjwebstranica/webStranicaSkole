@@ -44,7 +44,8 @@ const ArticlePage = () => {
       .get(`https://gimnazija.netlify.app/.netlify/functions/api/novosti/${id}`)
       .then((res) => {
         setArticle(res.data);
-        setImages(res.data.images);
+        if (res.data.images && Array.isArray(res.data.images))
+          setImages(res.data.images);
         setLoading(false);
       })
       .catch((err) => {
@@ -75,14 +76,15 @@ const ArticlePage = () => {
             <p>{article.body}</p>
           </div>
           <div className="ml-4 pt-3 flex flex-wrap">
-            {images.map((src, index) => (
-              <img
-                src={src}
-                onClick={() => openImageViewer(index)}
-                key={index}
-                className="m-1 cursor-pointer h-32 sm:block"
-              />
-            ))}
+            {images &&
+              images.map((src, index) => (
+                <img
+                  src={src}
+                  onClick={() => openImageViewer(index)}
+                  key={index}
+                  className="m-1 cursor-pointer h-32 sm:block"
+                />
+              ))}
 
             {isViewerOpen && (
               <ImageViewer
