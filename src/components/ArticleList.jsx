@@ -12,7 +12,7 @@ const ArticleList = () => {
     axios
       .get("/.netlify/novosti")
       .then((res) => {
-        setData(res.data.data.reverse());
+        setData(res.data.data);
 
         setLoading(false);
       })
