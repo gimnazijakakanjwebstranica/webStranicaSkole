@@ -10,7 +10,7 @@ const ArticleList = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://127.0.0.1:5555/novosti")
+      .get("https://gimnazija.netlify.app/novosti")
       .then((res) => {
         setData(res.data.data.reverse());
 
