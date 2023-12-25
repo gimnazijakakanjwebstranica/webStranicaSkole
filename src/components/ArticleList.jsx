@@ -10,9 +10,9 @@ const ArticleList = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("/.netlify/novosti")
+      .get("https://gimnazija.netlify.app/.netlify/functions/api")
       .then((res) => {
-        setData(res.data.data);
+        setData(res.data.data.reverse());
 
         setLoading(false);
       })
