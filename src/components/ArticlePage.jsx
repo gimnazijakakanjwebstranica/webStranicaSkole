@@ -41,7 +41,7 @@ const ArticlePage = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/novosti/${id}`)
+      .get(`http://127.0.0.1:5555/novosti/${id}`)
       .then((res) => {
         setArticle(res.data);
         setImages(res.data.images);
