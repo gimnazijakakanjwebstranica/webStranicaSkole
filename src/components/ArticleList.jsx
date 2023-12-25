@@ -13,7 +13,6 @@ const ArticleList = () => {
       .get("https://gimnazija.netlify.app/.netlify/functions/api")
       .then((res) => {
         setData(res.data.data.reverse());
-
         setLoading(false);
       })
       .catch((err) => {

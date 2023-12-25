@@ -41,7 +41,7 @@ const ArticlePage = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/novosti/${id}`)
+      .get(`https://gimnazija.netlify.app/.netlify/functions/api/novosti/${id}`)
       .then((res) => {
         setArticle(res.data);
         setImages(res.data.images);
