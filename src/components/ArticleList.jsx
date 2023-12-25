@@ -10,7 +10,7 @@ const ArticleList = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://api.netlify.com/novosti")
+      .get("/.netlify/novosti")
       .then((res) => {
         setData(res.data.data.reverse());
 
