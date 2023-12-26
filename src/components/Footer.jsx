@@ -5,6 +5,7 @@ const Footer = () => {
   return (
     <div className="bg-gray-800 text-white py-4">
       <div className="container mx-auto">
+
         {/* Kontakt */}
         <div className="p-4">
           <div className="md:w-full">
@@ -26,20 +27,20 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-      </div>
 
- {/* Copyright */}
- <div className="container mx-auto text-center mt-4">
-        <p className="text-sm">
-          &copy; 2023 - Sva prava zadržana -{" "}
-          <a href="https://www.facebook.com/MIrzaMladost" className="underline">
-            Mirza Hodzic
-          </a>
-          <a href="https://www.facebook.com/nedimnn10" className="underline">
-            {" "}
-            Nedim Neimarlija
-          </a>
-        </p>
+        {/* Copyright */}
+        <div className="container mx-auto text-center mt-4">
+          <p className="text-sm">
+            &copy; 2023 - Sva prava zadržana -{" "}
+            <a href="https://www.facebook.com/MIrzaMladost" className="underline">
+              Mirza Hodzic
+            </a>
+            <a href="https://www.facebook.com/nedimnn10" className="underline">
+               Nedim Neimarlija
+            </a>
+          </p>
+        </div>
+
       </div>
     </div>
   );

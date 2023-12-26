@@ -1,101 +1,43 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
+import React from 'react';
+import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer';
 
 const Profesori = () => {
-  const [profesori, setProfesori] = useState([]);
-  const [ime, setIme] = useState("");
-  const [prezime, setPrezime] = useState("");
-
-  useEffect(() => {
-    // Dobavljanje profesora s backenda
-    fetchData();
-  }, []); // Ispravljena zagrada
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("/api/profesori");
-      setProfesori(response.data);
-    } catch (error) {
-      console.error("Greška pri dobavljanju profesora", error);
-    }
-  };
-
-  const dodajProfesora = async () => {
-    try {
-      await axios.post("/api/profesori", { ime, prezime });
-      setIme("");
-      setPrezime("");
-      fetchData();
-    } catch (error) {
-      console.error("Greška pri dodavanju profesora", error);
-    }
-  };
-
-  const obrisiProfesora = async (id) => {
-    try {
-      await axios.delete(`/api/profesori/${id}`);
-      fetchData();
-    } catch (error) {
-      console.error("Greška pri brisanju profesora", error);
-    }
-  };
+  // Unapred definisani profesori
+  const profesori = [
+    { titula: 'Doc. Dr. Sc.', imePrezime: 'Tarik Baždalić', predmet: 'Matematika, Nacrtna geometrija, Informatika, Programiranje, Web dizajn, Sigurnost informacija' },
+    { titula: 'Prof.', imePrezime: 'Senadina Ljubović Kovačević', predmet: 'Matematika, Nacrtna geometrija' },
+    // Dodajte ostale profesore prema potrebi
+  ];
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col justify-between">
       <NavBar />
-      <div className="container mx-auto mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Profesori</h2>
-        <div className="mb-4">
-          <input
-            type="text"
-            className="w-1/4 p-2 border border-gray-300 mr-2 rounded-l"
-            placeholder="Ime"
-            value={ime}
-            onChange={(e) => setIme(e.target.value)}
-          />
-          <input
-            type="text"
-            className="w-1/4 p-2 border border-gray-300 mr-2 rounded-l"
-            placeholder="Prezime"
-            value={prezime}
-            onChange={(e) => setPrezime(e.target.value)}
-          />
-          <button
-            className="w-1/4 bg-blue-500 text-white p-2 rounded-r"
-            onClick={dodajProfesora}
-          >
-            Dodaj profesora
-          </button>
-        </div>
 
-        <table className="min-w-full table-auto">
-          <thead>
-            <tr>
-              <th className="border p-3">Ime</th>
-              <th className="border p-3">Prezime</th>
-              <th className="border p-3">Akcije</th>
-            </tr>
-          </thead>
-          <tbody>
-            {profesori.map((profesor) => (
-              <tr key={profesor.id}>
-                <td className="border p-3">{profesor.ime}</td>
-                <td className="border p-3">{profesor.prezime}</td>
-                <td className="border p-3">
-                  <button
-                    className="bg-red-500 text-white p-2 rounded"
-                    onClick={() => obrisiProfesora(profesor.id)}
-                  >
-                    Obriši
-                  </button>
-                </td>
+      <div className="container mx-auto p-4">
+        <h2 className="text-2xl font-bold mb-4">Lista profesora</h2>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-300">
+            <thead>
+              <tr>
+                <th className="py-2 px-4 border-b">Titula</th>
+                <th className="py-2 px-4 border-b">Ime i prezime</th>
+                <th className="py-2 px-4 border-b">Predmet koji predaje</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {profesori.map((profesor, index) => (
+                <tr key={index}>
+                  <td className="py-2 px-4 border-b">{profesor.titula}</td>
+                  <td className="py-2 px-4 border-b">{profesor.imePrezime}</td>
+                  <td className="py-2 px-4 border-b">{profesor.predmet}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
+
       <Footer />
     </div>
   );
