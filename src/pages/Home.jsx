@@ -7,7 +7,7 @@ const Home = () => {
     return (
       <div className="font-link">
         <NavBar />
-        <h1 className="text-center text-4xl font-extrabold pt-3">Novosti</h1>
+        <h1 className="text-center text-4xl font-bold pt-3">Novosti</h1>
         <ArticleList />
        <GoTop/>
         <Footer />

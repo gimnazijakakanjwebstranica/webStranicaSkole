@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import LoginForm from "../components/LoginForm";
-import AdminNavBar from "../components/AdminNavBar";
+import LoginForm from "../../components/LoginForm";
+import AdminNavBar from "../../components/AdminNavBar";
 import axios from "axios";
-import Spinner from "../components/Spinner";
+import Spinner from "../../components/Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 

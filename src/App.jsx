@@ -2,11 +2,9 @@ import { useRoutes } from "react-router-dom";
 import "./App.css";
 
 import Home from "./pages/Home";
-import AdminPanel from "./pages/AdminPanel";
+import AdminPanel from "./pages/admin/AdminPanel";
 
 import Sekcije from "./pages/za-ucenike/Sekcije";
-import LikovniRadovi from "./pages/za-ucenike/LikovniRadovi";
-import LiterarniRadovi from "./pages/za-ucenike/LiterarniRadovi";
 import IzvodIzPravilaGimnazije from "./pages/za-ucenike/IzvodIzPravilaGimnazije";
 import TerminiVannastavnihAktivnosti from "./pages/za-ucenike/TerminiVannastavnihAktivnosti";
 import UputstvoZaIzraduMaturskihRadova from "./pages/za-ucenike/UputstvoZaMaturskeRadove";
@@ -33,24 +31,25 @@ import UceniciGeneracije from "./pages/o-skoli/UceniciGeneracije";
 import NastavniKalendar from "./pages/o-skoli/NastavniKalendar";
 
 import ArticlePage from "./components/ArticlePage";
-
-import AdminArticle from "./pages/AdminArticle";
+import AdminEmployees from "./pages/admin/AdminEmployees";
+import AdminArticle from "./pages/admin/AdminArticle";
+import AdminZaUcenike from "./pages/admin/AdminZaUcenike";
+import AdminZaRoditelje from "./pages/admin/AdminZaRoditelje";
+import AdminOSkoli from "./pages/admin/AdminOSkoli";
 
 function App() {
   const routeResult = useRoutes([
     { path: "/", element: <Home /> },
     { path: "/admin-panel", element: <AdminPanel /> },
     { path: "/za-ucenike/sekcije", element: <Sekcije /> },
-    { path: "/za-ucenike/likovni-radovi", element: <LikovniRadovi /> },
     {
       path: "/za-ucenike/izvod-iz-pravila-gimnazije",
       element: <IzvodIzPravilaGimnazije />,
     },
     {
-      path: "/za-ucenike/tremini-vannastavnih-aktivnosti",
+      path: "/za-ucenike/termini-vannastavnih-aktivnosti",
       element: <TerminiVannastavnihAktivnosti />,
     },
-    { path: "/za-ucenike/literarni-radovi", element: <LiterarniRadovi /> },
     {
       path: "/za-ucenike/uputstvo-za-izradu-maturskih-radova",
       element: <UputstvoZaIzraduMaturskihRadova />,
@@ -101,6 +100,10 @@ function App() {
     { path: "/novosti/:id", element: <ArticlePage /> },
 
     { path: "/admin-panel/admin-clanci", element: <AdminArticle /> },
+    { path: "/admin-panel/admin-za-ucenike", element: <AdminZaUcenike /> },
+    { path: "/admin-panel/admin-uposlenici", element: <AdminEmployees /> },
+    { path: "/admin-panel/admin-za-roditelje", element: <AdminZaRoditelje /> },
+    { path: "/admin-panel/admin-o-skoli", element: <AdminOSkoli /> },
   ]);
 
   return routeResult;

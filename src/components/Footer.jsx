@@ -32,7 +32,7 @@ const Footer = () => {
         <div className="container mx-auto text-center mt-4">
           <p className="text-sm">
             &copy; 2023 - Sva prava zadržana -{" "}
-            <a href="https://www.facebook.com/MIrzaMladost" className="underline">
+            <a href="https://www.facebook.com/MIrzaMladost" className="underline pr-1">
               Mirza Hodzic
             </a>
             <a href="https://www.facebook.com/nedimnn10" className="underline">

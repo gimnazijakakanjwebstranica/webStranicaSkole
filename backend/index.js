@@ -4,6 +4,12 @@ import cors from "cors";
 import mongoose from "mongoose";
 import articleRoute from "./routes/articleRoute.js";
 import adminRoute from "./routes/adminRoute.js";
+import professorRoute from "./routes/professorRoute.js";
+import sekcijeRoute from "./routes/sekcijeRoute.js";
+import vannastavneAktivnostiRoute from "./routes/vannastavneAktivnostiRoute.js";
+import informacijeRoute from "./routes/informacijeRoute.js"
+import ucenikGeneracijeRoute from "./routes/ucenikGeneracijeRoute.js"
+import maturantiRoute from "./routes/maturantiRoute.js"
 import bodyParser from "body-parser";
 
 const app = express();
@@ -12,16 +18,6 @@ app.use(bodyParser.json({ limit: "10mb" }));
 
 //za policy
 app.use(cors());
-
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gimnazija.netlify.app"
-  );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
 
 //za koristenje body requestova
 app.use(express.json());
@@ -33,6 +29,15 @@ app.get("/", (req, res) => {
 
 app.use("/novosti", articleRoute);
 app.use("/admin", adminRoute);
+app.use("/uposlenici/profesori", professorRoute);
+app.use("/za-ucenike/sekcije", sekcijeRoute);
+app.use(
+  "/za-ucenike/termini-vannastavnih-aktivnosti",
+  vannastavneAktivnostiRoute
+);
+app.use("/za-roditelje/termini-individualnih-konsultacija", informacijeRoute);
+app.use("/o-skoli/ucenici-generacije", ucenikGeneracijeRoute);
+app.use("/o-skoli/maturanti", maturantiRoute);
 
 mongoose
   .connect(mongoDBURL)

@@ -64,7 +64,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
               </li>
               <li>
                 <Link
-                  to="/za-ucenike/tremini-vannastavnih-aktivnosti"
+                  to="/za-ucenike/termini-vannastavnih-aktivnosti"
                   className="hover:text-blue-400"
                 >
                   Termini vannastavnih aktivnosti
