@@ -5,7 +5,6 @@ import ImageModal from "../../components/ImageModal";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 const Maturanti = () => {
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -30,7 +29,7 @@ const Maturanti = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        alert(err.message);
       });
   }, []);
   return (

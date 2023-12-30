@@ -72,7 +72,7 @@ const NavBar = () => {
             <div className="group relative">
               <div className="flex hover:text-blue-400 cursor-pointer">
                 <MdArrowDropDown className="pt-1" />
-                <h>ZA UČENIKE</h>
+                <h1>ZA UČENIKE</h1>
               </div>
               <div className="absolute hidden group-hover:block bg-white max-w-[600px] w-max p-2  shadow-lg">
                 <Link to="/za-ucenike/sekcije" className="hover:text-blue-400">
@@ -105,7 +105,7 @@ const NavBar = () => {
             <div className="group relative">
               <div className="flex hover:text-blue-400 cursor-pointer">
                 <MdArrowDropDown className="pt-1" />
-                <h>ZA RODITELJE</h>
+                <h1>ZA RODITELJE</h1>
               </div>
 
               <div className="absolute hidden group-hover:block bg-white max-w-[600px] w-max p-2 shadow-lg">
@@ -236,10 +236,6 @@ const NavBar = () => {
                   className="hover:text-blue-400"
                 >
                   Nastavni kalendar
-                </Link>
-                <br />
-                <Link to="/o-skoli/kontakt" className="hover:text-blue-400">
-                  Kontakt
                 </Link>
                 <br />
               </div>

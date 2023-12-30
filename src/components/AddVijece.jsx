@@ -6,32 +6,18 @@ import Spinner from "./Spinner";
 import { Buffer } from "buffer";
 Buffer.from("anything", "base64");
 
-const CreateArticleForm = () => {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [content, setContent] = useState("");
+const AddVijece = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const convertToDDMMYYYY = (inputDate) => {
-    const date = new Date(inputDate);
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      title: title,
-      date: convertToDDMMYYYY(date),
-      body: content,
       images: images,
     };
 
     axios
-      .post("http://localhost:5555/novosti", data)
+      .post("http://localhost:5555/za-roditelje/vijece-roditelja", data)
       .then(() => {
         alert("Uspjesno");
         setLoading(false);
@@ -41,10 +27,8 @@ const CreateArticleForm = () => {
         setLoading(false);
       });
 
-    setTitle("");
-    setDate("");
-    setContent("");
     setImages([]);
+    document.location.reload();
   };
 
   const handleDrop = (acceptedFiles) => {
@@ -64,44 +48,13 @@ const CreateArticleForm = () => {
   };
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
-
   return (
     <div className="font-link max-w-md min-w-[350px] p-6 bg-white rounded-md shadow-md">
-      <h2 className="text-xl mb-4 font-semibold">Kreiraj novi članak</h2>
+      <h2 className="text-xl mb-4 font-semibold">Dodaj termin vijeća</h2>
       {loading ? (
         <Spinner />
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block mb-1 font-medium">Naslov:</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Unesi naslov"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block mb-1 font-medium">Datum:</label>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              placeholder="Unesi datum"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block mb-1 font-medium">Tekst:</label>
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Unesi tekst"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-              rows="4"
-            ></textarea>
-          </div>
           <div {...getRootProps()} className="flex items-center space-x-2">
             <label className="block mb-1 font-medium">Slike:</label>
             <div className="cursor-pointer border border-gray-300 rounded-md p-2 flex items-center">
@@ -131,7 +84,7 @@ const CreateArticleForm = () => {
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-md transition duration-300"
           >
-            Kreiraj članak
+            Dodaj sliku
           </button>
         </form>
       )}
@@ -139,4 +92,4 @@ const CreateArticleForm = () => {
   );
 };
 
-export default CreateArticleForm;
+export default AddVijece;

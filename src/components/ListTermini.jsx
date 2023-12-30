@@ -48,7 +48,7 @@ const ListSekcije = () => {
       window.location.reload();
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      alert(err);
     }
   };
 
@@ -64,7 +64,7 @@ const ListSekcije = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        alert(err.message);
       });
   }, []);
   return (

@@ -30,7 +30,7 @@ const TerminiVannastavnihAktivnosti = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        alert(err.message);
       });
   }, []);
   return (

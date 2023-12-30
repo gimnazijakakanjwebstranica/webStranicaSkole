@@ -1,22 +1,23 @@
 import express from "express";
-import { Maturanti } from "../models/maturantiModel.js";
+import { Administrativno } from "../models/administrativnoModel.js";
 
 const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    if (!req.body.images) {
+    if (!req.body.full_name || !req.body.job) {
       return res.status(400).send({
-        message: "Unesi slike",
+        message: "Unesi zadata polja: ime i prezime i posao",
       });
     }
-    const newMaturanti = {
-      images: req.body.images,
+    const newEmployee = {
+      full_name: req.body.full_name,
+      job: req.body.job,
     };
 
-    const maturanti = await Maturanti.create(newMaturanti);
+    const employee = await Administrativno.create(newEmployee);
 
-    return res.status(201).send(maturanti);
+    return res.status(201).send(employee);
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
@@ -25,10 +26,10 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const maturanti = await Maturanti.find({});
+    const employee = await Administrativno.find({});
     return res.status(200).json({
-      count: maturanti.length,
-      data: maturanti,
+      count: employee.length,
+      data: employee,
     });
   } catch (err) {
     console.log(err.message);
@@ -39,8 +40,8 @@ router.get("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Maturanti.findByIdAndDelete(id);
-    if (!result) res.status(404).send({ message: "Slika nije pronadena" });
+    const result = await Administrativno.findByIdAndDelete(id);
+    if (!result) res.status(404).send({ message: "Profesor nije pronaden" });
 
     res.status(200).send({ message: "Uspjesno obrisano" });
   } catch (err) {

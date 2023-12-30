@@ -22,11 +22,11 @@ const AddVannastavneAktivnosti = () => {
         data
       )
       .then(() => {
-        console.log("Uspjesno");
+        alert("Uspjesno");
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err.message);
+        alert(err.message);
         setLoading(false);
       });
 
@@ -53,7 +53,9 @@ const AddVannastavneAktivnosti = () => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
   return (
     <div className="font-link max-w-md min-w-[350px] p-6 bg-white rounded-md shadow-md">
-      <h2 className="text-xl mb-4 font-semibold">Dodaj vannastavne aktivnosti</h2>
+      <h2 className="text-xl mb-4 font-semibold">
+        Dodaj vannastavne aktivnosti
+      </h2>
       {loading ? (
         <Spinner />
       ) : (

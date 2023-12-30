@@ -19,7 +19,7 @@ const UceniciGeneracije = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        alert(err.message);
       });
   }, []);
 

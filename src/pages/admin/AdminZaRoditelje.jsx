@@ -1,4 +1,6 @@
 import AdminNavBar from "../../components/AdminNavBar";
+import AddVijece from "../../components/AddVijece"
+import ListVijece from "../../components/ListVijece"
 import AddTermin from "../../components/AddTermin";
 import ListTermini from "../../components/ListTermini"
 
@@ -10,7 +12,8 @@ const AdminZaRoditelje = () => {
         <div className="shadow-lg p-5 border-[1px] rounded-md">
           <h1 className="text-center text-2xl font-bold pb-4">Vijeće roditelja</h1>
           <div className="flex justify-center flex-wrap gap-9">
-            
+            <AddVijece/>
+            <ListVijece/>
           </div>
         </div>
         <div className="shadow-lg p-5 border-[1px] rounded-md">

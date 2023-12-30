@@ -8,8 +8,8 @@ import ImageModal from "./ImageModal";
 const ListMaturnati = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false); 
-  const [maturantiIdToDelete, setMaturantiIdToDelete] = useState(null); 
+  const [showModal, setShowModal] = useState(false);
+  const [maturantiIdToDelete, setMaturantiIdToDelete] = useState(null);
   const [showModalImage, setShowModalImage] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
 
@@ -46,7 +46,7 @@ const ListMaturnati = () => {
       window.location.reload();
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      alert(err);
     }
   };
 
@@ -60,7 +60,7 @@ const ListMaturnati = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        alert(err.message);
       });
   }, []);
   return (

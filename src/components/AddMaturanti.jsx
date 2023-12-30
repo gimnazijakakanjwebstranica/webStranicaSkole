@@ -19,11 +19,11 @@ const AddMaturanti = () => {
     axios
       .post("http://localhost:5555/o-skoli/maturanti", data)
       .then(() => {
-        console.log("Uspjesno");
+        alert("Uspjesno");
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err.message);
+        alert(err.message);
         setLoading(false);
       });
 

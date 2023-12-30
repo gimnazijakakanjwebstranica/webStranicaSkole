@@ -48,7 +48,7 @@ const ListVannastavneAktivnosti = () => {
       window.location.reload();
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      alert(err);
     }
   };
 
@@ -62,7 +62,7 @@ const ListVannastavneAktivnosti = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        alert(err.message);
       });
   }, []);
   return (

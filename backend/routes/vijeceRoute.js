@@ -1,5 +1,5 @@
 import express from "express";
-import { Maturanti } from "../models/maturantiModel.js";
+import { VijeceRoditelja } from "../models/vijeceModel.js";
 
 const router = express.Router();
 
@@ -10,13 +10,13 @@ router.post("/", async (req, res) => {
         message: "Unesi slike",
       });
     }
-    const newMaturanti = {
+    const newVijece = {
       images: req.body.images,
     };
 
-    const maturanti = await Maturanti.create(newMaturanti);
+    const vijece = await VijeceRoditelja.create(newVijece);
 
-    return res.status(201).send(maturanti);
+    return res.status(201).send(vijece);
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
@@ -25,10 +25,10 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const maturanti = await Maturanti.find({});
+    const vijece = await VijeceRoditelja.find({});
     return res.status(200).json({
-      count: maturanti.length,
-      data: maturanti,
+      count: vijece.length,
+      data: vijece,
     });
   } catch (err) {
     console.log(err.message);
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Maturanti.findByIdAndDelete(id);
+    const result = await VijeceRoditelja.findByIdAndDelete(id);
     if (!result) res.status(404).send({ message: "Slika nije pronadena" });
 
     res.status(200).send({ message: "Uspjesno obrisano" });

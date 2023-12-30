@@ -41,7 +41,7 @@ const AdminPanel = () => {
       hideModal();
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      alert(err);
     }
   };
 
@@ -57,29 +57,29 @@ const AdminPanel = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
         setLoading(false);
       });
   }, []);
 
-  const handleSubmit =  (e) => {
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const data = {
       username: username,
-      password:password
-    }
+      password: password,
+    };
     axios
       .post("http://localhost:5555/admin", data)
       .then(() => {
-        console.log("Uspjesno");
+        alert("Uspjesno");
         setLoading(false);
         window.location.reload(false);
       })
       .catch((err) => {
-        console.log(err.message);
+        alert(err.message);
         setLoading(false);
       });
-  }
+  };
 
   return (
     <div>

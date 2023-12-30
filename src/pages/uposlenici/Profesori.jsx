@@ -1,28 +1,29 @@
-import { useEffect, useState } from 'react';
-import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
+import axios from "axios";
 
 const Profesori = () => {
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-  
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    setLoading(true)
-    axios.get("http://localhost:5555/uposlenici/profesori").then((res) => {
-      
-       const sortedData = res.data.data.slice().sort((a, b) => {
-         return a.subjects.localeCompare(b.subjects);
-       });
+    setLoading(true);
+    axios
+      .get("http://localhost:5555/uposlenici/profesori")
+      .then((res) => {
+        const sortedData = res.data.data.slice().sort((a, b) => {
+          return a.subjects.localeCompare(b.subjects);
+        });
 
-       setData(sortedData.reverse());
-      setLoading(false)
-    }).catch((err) => {
-      console.log(err.message);
-      setLoading(false)
-    })
-
-  },[])
+        setData(sortedData.reverse());
+        setLoading(false);
+      })
+      .catch((err) => {
+        alert(err.message);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col justify-between">

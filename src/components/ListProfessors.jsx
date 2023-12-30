@@ -34,7 +34,7 @@ const ListProfessors = () => {
       window.location.reload(false);
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      alert(err);
     }
   };
 
@@ -46,12 +46,12 @@ const ListProfessors = () => {
         const sortedData = response.data.data.slice().sort((a, b) => {
           return a.subjects.localeCompare(b.subjects);
         });
-        setData(sortedData.reverse())
+        setData(sortedData.reverse());
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        alert(err.message);
       });
   }, []);
   return (
@@ -107,7 +107,7 @@ const ListProfessors = () => {
               return (
                 <tr key={professor._id} className="h-8">
                   <td className="border border-slate-700 rounded-md text-center">
-                    <p className="p-1">{index+1}</p>
+                    <p className="p-1">{index + 1}</p>
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     <p className="p-1">{professor.titles}</p>

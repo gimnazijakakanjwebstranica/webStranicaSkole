@@ -6,35 +6,35 @@ import ImageModal from "../../components/ImageModal";
 import Spinner from "../../components/Spinner";
 
 const TerminiIndividualnihKonsultacija = () => {
-const [data, setData] = useState([]);
-const [loading, setLoading] = useState(false);
-const [showModal, setShowModal] = useState(false);
-const [selectedImage, setSelectedImage] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
 
-const openModal = (imageUrl) => {
-  setSelectedImage(imageUrl);
-  setShowModal(true);
-};
+  const openModal = (imageUrl) => {
+    setSelectedImage(imageUrl);
+    setShowModal(true);
+  };
 
-const closeModal = () => {
-  setShowModal(false);
-};
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
-useEffect(() => {
-  setLoading(true);
-  axios
-    .get(
-      "http://localhost:5555/za-roditelje/termini-individualnih-konsultacija"
-    )
-    .then((response) => {
-      setData(response.data.data.reverse());
-      setLoading(false);
-    })
-    .catch((err) => {
-      setLoading(false);
-      console.log(err.message);
-    });
-}, []);
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(
+        "http://localhost:5555/za-roditelje/termini-individualnih-konsultacija"
+      )
+      .then((response) => {
+        setData(response.data.data.reverse());
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        alert(err.message);
+      });
+  }, []);
 
   return (
     <div>

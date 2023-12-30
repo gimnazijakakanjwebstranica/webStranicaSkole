@@ -25,7 +25,6 @@ import PomocnoTehnickoOsoblje from "./pages/uposlenici/PomocnoTehnickoOsoblje";
 
 import RijecDirektora from "./pages/o-skoli/RijecDirektora";
 import Historijat from "./pages/o-skoli/Historijat";
-import Kontakt from "./pages/o-skoli/Kontakt";
 import Maturanti from "./pages/o-skoli/Maturanti";
 import UceniciGeneracije from "./pages/o-skoli/UceniciGeneracije";
 import NastavniKalendar from "./pages/o-skoli/NastavniKalendar";
@@ -95,7 +94,6 @@ function App() {
     { path: "/o-skoli/maturanti", element: <Maturanti /> },
     { path: "/o-skoli/ucenici-generacije", element: <UceniciGeneracije /> },
     { path: "/o-skoli/nastavni-kalendar", element: <NastavniKalendar /> },
-    { path: "/o-skoli/kontakt", element: <Kontakt /> },
 
     { path: "/novosti/:id", element: <ArticlePage /> },
 

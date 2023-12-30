@@ -36,7 +36,7 @@ const ListArticle = () => {
       window.location.reload(false);
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      alert(err);
     }
   };
 
@@ -50,7 +50,7 @@ const ListArticle = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        alert(err.message);
       });
   }, []);
   return (

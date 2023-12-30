@@ -236,11 +236,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
                   Nastavni kalendar
                 </Link>
               </li>
-              <li>
-                <Link to="/o-skoli/kontakt" className="hover:text-blue-400">
-                  Kontakt
-                </Link>
-              </li>
+              
             </ul>
           </div>
         </div>

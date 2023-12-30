@@ -19,11 +19,11 @@ const AddSekcije = () => {
     axios
       .post("http://localhost:5555/za-ucenike/sekcije", data)
       .then(() => {
-        console.log("Uspjesno");
+        alert("Uspjesno");
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err.message);
+        alert(err.message);
         setLoading(false);
       });
 
