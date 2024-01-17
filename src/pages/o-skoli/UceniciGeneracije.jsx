@@ -4,6 +4,7 @@ import Spinner from "../../components/Spinner";
 import axios from "axios";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import { BACKEND_URL } from "../../../backend/config";
 
 const UceniciGeneracije = () => {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ const UceniciGeneracije = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/o-skoli/ucenici-generacije")
+      .get(`${BACKEND_URL}/o-skoli/ucenici-generacije`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

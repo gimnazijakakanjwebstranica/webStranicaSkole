@@ -4,6 +4,7 @@ import Spinner from "./Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import ImageModal from "./ImageModal";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListVijece = () => {
   const [data, setData] = useState([]);
@@ -42,7 +43,7 @@ const ListVijece = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `http://localhost:5555/za-roditelje/vijece-roditelja/${id}`
+        `${BACKEND_URL}/za-roditelje/vijece-roditelja/${id}`
       );
       setLoading(false);
       window.location.reload();
@@ -55,7 +56,7 @@ const ListVijece = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/za-roditelje/vijece-roditelja")
+      .get(`${BACKEND_URL}/za-roditelje/vijece-roditelja`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

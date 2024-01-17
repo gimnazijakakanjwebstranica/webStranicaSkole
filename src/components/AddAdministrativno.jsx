@@ -1,6 +1,7 @@
 import axios from "axios";
 import Spinner from "./Spinner";
 import { useState } from "react";
+import { BACKEND_URL } from "../../backend/config";
 
 const AddAdministrativno = () => {
   const [full_name, setFull_name] = useState("");
@@ -15,7 +16,7 @@ const AddAdministrativno = () => {
     };
 
     axios
-      .post("http://localhost:5555/uposlenici/administrativno-osoblje", data)
+      .post(`${BACKEND_URL}/uposlenici/administrativno-osoblje`, data)
       .then(() => {
         alert("Uspjesno");
         setLoading(false);

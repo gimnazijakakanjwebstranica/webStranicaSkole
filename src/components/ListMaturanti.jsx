@@ -4,6 +4,7 @@ import Spinner from "./Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import ImageModal from "./ImageModal";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListMaturnati = () => {
   const [data, setData] = useState([]);
@@ -41,7 +42,7 @@ const ListMaturnati = () => {
   const deleteMaturanti = async (id) => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:5555/o-skoli/maturanti/${id}`);
+      await axios.delete(`${BACKEND_URL}/o-skoli/maturanti/${id}`);
       setLoading(false);
       window.location.reload();
     } catch (err) {
@@ -53,7 +54,7 @@ const ListMaturnati = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/o-skoli/maturanti")
+      .get(`${BACKEND_URL}/o-skoli/maturanti`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

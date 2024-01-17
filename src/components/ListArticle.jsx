@@ -5,6 +5,7 @@ import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { FaLink } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListArticle = () => {
   const [data, setData] = useState([]);
@@ -31,7 +32,7 @@ const ListArticle = () => {
   const deleteArticle = async (id) => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:5555/novosti/${id}`);
+      await axios.delete(`${BACKEND_URL}/novosti/${id}`);
       setLoading(false);
       window.location.reload(false);
     } catch (err) {
@@ -43,7 +44,7 @@ const ListArticle = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/novosti")
+      .get(`${BACKEND_URL}/novosti`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

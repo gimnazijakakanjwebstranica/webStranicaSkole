@@ -4,6 +4,7 @@ import Spinner from "../../components/Spinner";
 import ImageModal from "../../components/ImageModal";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import { BACKEND_URL } from "../../../backend/config";
 
 const VijeceRoditelja = () => {
   const [data, setData] = useState([]);
@@ -23,7 +24,7 @@ const VijeceRoditelja = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/za-roditelje/vijece-roditelja")
+      .get(`${BACKEND_URL}/za-roditelje/vijece-roditelja`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

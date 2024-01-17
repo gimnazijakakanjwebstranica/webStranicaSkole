@@ -2,6 +2,7 @@ import Article from "./Article.jsx";
 import Spinner from "./Spinner.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BACKEND_URL } from "../../backend/config.js";
 
 const ArticleList = () => {
   const [data, setData] = useState([]);
@@ -10,7 +11,7 @@ const ArticleList = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/novosti")
+      .get(`${BACKEND_URL}/novosti`)
       .then((res) => {
         setData(res.data.data.reverse());
         setLoading(false);

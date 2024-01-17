@@ -3,6 +3,7 @@ import axios from "axios";
 import Spinner from "./Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListPomocno = () => {
   const [data, setData] = useState([]);
@@ -30,7 +31,7 @@ const ListPomocno = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `http://localhost:5555/uposlenici/pomocno-tehnicko-osoblje/${id}`
+        `${BACKEND_URL}/uposlenici/pomocno-tehnicko-osoblje/${id}`
       );
       setLoading(false);
       window.location.reload(false);
@@ -43,7 +44,7 @@ const ListPomocno = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/uposlenici/pomocno-tehnicko-osoblje")
+      .get(`${BACKEND_URL}/uposlenici/pomocno-tehnicko-osoblje`)
       .then((response) => {
         const sortedData = response.data.data.slice().sort((a, b) => {
           return a.subjects.localeCompare(b.subjects);

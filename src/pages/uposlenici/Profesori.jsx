@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import axios from "axios";
+import { BACKEND_URL } from "../../../backend/config";
 
 const Profesori = () => {
   const [data, setData] = useState([]);
@@ -10,7 +11,7 @@ const Profesori = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/uposlenici/profesori")
+      .get(`${BACKEND_URL}/uposlenici/profesori`)
       .then((res) => {
         const sortedData = res.data.data.slice().sort((a, b) => {
           return a.subjects.localeCompare(b.subjects);

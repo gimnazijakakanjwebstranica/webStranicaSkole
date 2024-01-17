@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ImageModal from "../../components/ImageModal";
 import Spinner from "../../components/Spinner";
+import { BACKEND_URL } from "../../../backend/config";
 
 const Sekcije = () => {
   const [data, setData] = useState([]);
@@ -23,7 +24,7 @@ const Sekcije = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/za-ucenike/sekcije")
+      .get(`${BACKEND_URL}/za-ucenike/sekcije`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

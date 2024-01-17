@@ -6,6 +6,7 @@ import { useEffect, useState, useCallback } from "react";
 import Footer from "./Footer";
 import ImageViewer from "react-simple-image-viewer";
 import { CiClock1 } from "react-icons/ci";
+import { BACKEND_URL } from "../../backend/config";
 
 const ArticlePage = () => {
   const [article, setArticle] = useState({});
@@ -41,7 +42,7 @@ const ArticlePage = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/novosti/${id}`)
+      .get(`${BACKEND_URL}/novosti/${id}`)
       .then((res) => {
         setArticle(res.data);
         if (res.data.images && Array.isArray(res.data.images))

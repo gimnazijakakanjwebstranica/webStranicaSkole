@@ -4,6 +4,7 @@ import Spinner from "./Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import ImageModal from "./ImageModal";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListSekcije = () => {
   const [data, setData] = useState([]);
@@ -42,7 +43,7 @@ const ListSekcije = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `http://localhost:5555/za-roditelje/termini-individualnih-konsultacija/${id}`
+        `${BACKEND_URL}/za-roditelje/termini-individualnih-konsultacija/${id}`
       );
       setLoading(false);
       window.location.reload();
@@ -56,7 +57,7 @@ const ListSekcije = () => {
     setLoading(true);
     axios
       .get(
-        "http://localhost:5555/za-roditelje/termini-individualnih-konsultacija"
+        `${BACKEND_URL}/za-roditelje/termini-individualnih-konsultacija`
       )
       .then((response) => {
         setData(response.data.data.reverse());

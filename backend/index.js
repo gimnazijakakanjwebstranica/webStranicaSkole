@@ -1,5 +1,5 @@
 import express from "express";
-import { PORT, mongoDBURL } from "./config.js";
+import { PORT, MONGO_URI } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
 import articleRoute from "./routes/articleRoute.js";
@@ -48,7 +48,7 @@ app.use("/o-skoli/ucenici-generacije", ucenikGeneracijeRoute);
 app.use("/o-skoli/maturanti", maturantiRoute);
 
 mongoose
-  .connect(mongoDBURL)
+  .connect(MONGO_URI)
   .then(() => {
     console.log("App conected to database");
     app.listen(process.env.PORT || PORT, () => {

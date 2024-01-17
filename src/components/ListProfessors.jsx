@@ -3,6 +3,7 @@ import axios from "axios";
 import Spinner from "./Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListProfessors = () => {
   const [data, setData] = useState([]);
@@ -29,7 +30,7 @@ const ListProfessors = () => {
   const deleteProfessor = async (id) => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:5555/uposlenici/profesori/${id}`);
+      await axios.delete(`${BACKEND_URL}/uposlenici/profesori/${id}`);
       setLoading(false);
       window.location.reload(false);
     } catch (err) {
@@ -41,7 +42,7 @@ const ListProfessors = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/uposlenici/profesori")
+      .get(`${BACKEND_URL}/uposlenici/profesori`)
       .then((response) => {
         const sortedData = response.data.data.slice().sort((a, b) => {
           return a.subjects.localeCompare(b.subjects);

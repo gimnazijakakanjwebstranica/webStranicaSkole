@@ -1,6 +1,7 @@
 import axios from "axios";
 import Spinner from "./Spinner";
 import { useState } from "react";
+import { BACKEND_URL } from "../../backend/config";
 
 const AddProfessor = () => {
   const [full_name, setFull_name] = useState("");
@@ -17,7 +18,7 @@ const AddProfessor = () => {
     };
 
     axios
-      .post("http://localhost:5555/uposlenici/profesori", data)
+      .post(`${BACKEND_URL}/uposlenici/profesori`, data)
       .then(() => {
         alert("Uspjesno");
         setLoading(false);

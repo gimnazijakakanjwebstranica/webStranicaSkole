@@ -4,6 +4,7 @@ import Spinner from "./Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import ImageModal from "./ImageModal";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListSekcije = () => {
   const [data, setData] = useState([]);
@@ -41,7 +42,7 @@ const ListSekcije = () => {
   const deleteSekcije = async (id) => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:5555/za-ucenike/sekcije/${id}`);
+      await axios.delete(`${BACKEND_URL}/za-ucenike/sekcije/${id}`);
       setLoading(false);
       window.location.reload();
     } catch (err) {
@@ -53,7 +54,7 @@ const ListSekcije = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/za-ucenike/sekcije")
+      .get(`${BACKEND_URL}/za-ucenike/sekcije`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

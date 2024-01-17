@@ -4,6 +4,7 @@ import { FaImages } from "react-icons/fa";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { Buffer } from "buffer";
+import { BACKEND_URL } from "../../backend/config";
 Buffer.from("anything", "base64");
 
 const AddVannastavneAktivnosti = () => {
@@ -18,7 +19,7 @@ const AddVannastavneAktivnosti = () => {
 
     axios
       .post(
-        "http://localhost:5555/za-ucenike/termini-vannastavnih-aktivnosti",
+        `${BACKEND_URL}/za-ucenike/termini-vannastavnih-aktivnosti`,
         data
       )
       .then(() => {

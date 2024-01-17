@@ -4,6 +4,7 @@ import { FaImages } from "react-icons/fa";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { Buffer } from "buffer";
+import { BACKEND_URL } from "../../backend/config";
 Buffer.from("anything", "base64");
 
 const AddSekcije = () => {
@@ -17,7 +18,7 @@ const AddSekcije = () => {
     };
 
     axios
-      .post("http://localhost:5555/za-ucenike/sekcije", data)
+      .post(`${BACKEND_URL}/za-ucenike/sekcije`, data)
       .then(() => {
         alert("Uspjesno");
         setLoading(false);

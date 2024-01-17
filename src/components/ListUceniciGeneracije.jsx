@@ -3,6 +3,7 @@ import axios from "axios";
 import Spinner from "./Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListUceniciGeneracije = () => {
   const [data, setData] = useState([]);
@@ -30,7 +31,7 @@ const ListUceniciGeneracije = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `http://localhost:5555/o-skoli/ucenici-generacije/${id}`
+        `${BACKEND_URL}/o-skoli/ucenici-generacije/${id}`
       );
       setLoading(false);
       window.location.reload(false);
@@ -43,7 +44,7 @@ const ListUceniciGeneracije = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/o-skoli/ucenici-generacije")
+      .get(`${BACKEND_URL}/o-skoli/ucenici-generacije`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

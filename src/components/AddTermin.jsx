@@ -4,6 +4,7 @@ import { FaImages } from "react-icons/fa";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { Buffer } from "buffer";
+import { BACKEND_URL } from "../../backend/config";
 Buffer.from("anything", "base64");
 
 const AddTermin = () => {
@@ -18,7 +19,7 @@ const AddTermin = () => {
 
     axios
       .post(
-        "http://localhost:5555/za-roditelje/termini-individualnih-konsultacija",
+        `${BACKEND_URL}/za-roditelje/termini-individualnih-konsultacija`,
         data
       )
       .then(() => {

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ImageModal from "../../components/ImageModal";
 import Spinner from "../../components/Spinner";
+import { BACKEND_URL } from "../../../backend/config";
 
 const TerminiVannastavnihAktivnosti = () => {
   const [data, setData] = useState([]);
@@ -23,7 +24,7 @@ const TerminiVannastavnihAktivnosti = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/za-ucenike/termini-vannastavnih-aktivnosti")
+      .get(`${BACKEND_URL}/za-ucenike/termini-vannastavnih-aktivnosti`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

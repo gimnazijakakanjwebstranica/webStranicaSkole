@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BACKEND_URL } from "../../backend/config";
 
 const LoginForm = ({ handleLoginForm }) => {
   const [username, setUsername] = useState("");
@@ -11,7 +12,7 @@ const LoginForm = ({ handleLoginForm }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5555/admin/login", {
+      const response = await axios.post(`${BACKEND_URL}/admin/login`, {
         username,
         password,
       });
@@ -39,7 +40,7 @@ const LoginForm = ({ handleLoginForm }) => {
     if (localToken) {
       // Send a request to the server to validate the token
       axios
-        .post("http://localhost:5555/admin/verify-token", null,{
+        .post(`${BACKEND_URL}/admin/verify-token`, null,{
           headers: {
             "x-access-token": localToken,
           },

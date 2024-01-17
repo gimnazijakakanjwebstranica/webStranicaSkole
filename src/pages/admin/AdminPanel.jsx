@@ -5,6 +5,7 @@ import axios from "axios";
 import Spinner from "../../components/Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { BACKEND_URL } from "../../../backend/config";
 
 const AdminPanel = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,7 +35,7 @@ const AdminPanel = () => {
   const deleteAdmin = async (id) => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:5555/admin/${id}`);
+      await axios.delete(`${BACKEND_URL}/admin/${id}`);
       setLoading(false);
       const updatedData = data.filter((admin) => admin._id !== id);
       setData(updatedData);
@@ -51,7 +52,7 @@ const AdminPanel = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/admin")
+      .get(`${BACKEND_URL}/admin`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);
@@ -69,7 +70,7 @@ const AdminPanel = () => {
       password: password,
     };
     axios
-      .post("http://localhost:5555/admin", data)
+      .post(`${BACKEND_URL}/admin`, data)
       .then(() => {
         alert("Uspjesno");
         setLoading(false);

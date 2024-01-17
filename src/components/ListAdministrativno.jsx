@@ -3,6 +3,7 @@ import axios from "axios";
 import Spinner from "./Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListAdministrativno = () => {
   const [data, setData] = useState([]);
@@ -31,7 +32,7 @@ const ListAdministrativno = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `http://localhost:5555/uposlenici/administrativno-osoblje/${id}`
+        `${BACKEND_URL}/uposlenici/administrativno-osoblje/${id}`
       );
       setLoading(false);
       window.location.reload(false);
@@ -44,7 +45,7 @@ const ListAdministrativno = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/uposlenici/administrativno-osoblje")
+      .get(`${BACKEND_URL}/uposlenici/administrativno-osoblje`)
       .then((response) => {
         const sortedData = response.data.data.slice().sort((a, b) => {
           return a.subjects.localeCompare(b.subjects);

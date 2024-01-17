@@ -4,6 +4,7 @@ import Spinner from "../../components/Spinner";
 import ImageModal from "../../components/ImageModal";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import { BACKEND_URL } from "../../../backend/config";
 const Maturanti = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const Maturanti = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/o-skoli/maturanti")
+      .get(`${BACKEND_URL}/o-skoli/maturanti`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

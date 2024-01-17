@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ImageModal from "../../components/ImageModal";
 import Spinner from "../../components/Spinner";
+import { BACKEND_URL } from "../../../backend/config";
 
 const TerminiIndividualnihKonsultacija = () => {
   const [data, setData] = useState([]);
@@ -24,7 +25,7 @@ const TerminiIndividualnihKonsultacija = () => {
     setLoading(true);
     axios
       .get(
-        "http://localhost:5555/za-roditelje/termini-individualnih-konsultacija"
+        `${BACKEND_URL}/za-roditelje/termini-individualnih-konsultacija`
       )
       .then((response) => {
         setData(response.data.data.reverse());

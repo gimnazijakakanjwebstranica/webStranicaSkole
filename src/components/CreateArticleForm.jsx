@@ -4,6 +4,7 @@ import { FaImages } from "react-icons/fa";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { Buffer } from "buffer";
+import { BACKEND_URL } from "../../backend/config";
 Buffer.from("anything", "base64");
 
 const CreateArticleForm = () => {
@@ -31,7 +32,7 @@ const CreateArticleForm = () => {
     };
 
     axios
-      .post("http://localhost:5555/novosti", data)
+      .post(`${BACKEND_URL}/novosti`, data)
       .then(() => {
         alert("Uspjesno");
         setLoading(false);

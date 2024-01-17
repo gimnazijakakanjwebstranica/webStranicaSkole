@@ -4,6 +4,7 @@ import Spinner from "./Spinner";
 import { MdFormatListNumbered } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import ImageModal from "./ImageModal";
+import { BACKEND_URL } from "../../backend/config";
 
 const ListVannastavneAktivnosti = () => {
   const [data, setData] = useState([]);
@@ -42,7 +43,7 @@ const ListVannastavneAktivnosti = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `http://localhost:5555/za-ucenike/tremini-vannastavnih-aktivnosti/${id}`
+        `${BACKEND_URL}/za-ucenike/tremini-vannastavnih-aktivnosti/${id}`
       );
       setLoading(false);
       window.location.reload();
@@ -55,7 +56,7 @@ const ListVannastavneAktivnosti = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/za-ucenike/termini-vannastavnih-aktivnosti")
+      .get(`${BACKEND_URL}/za-ucenike/termini-vannastavnih-aktivnosti`)
       .then((response) => {
         setData(response.data.data.reverse());
         setLoading(false);

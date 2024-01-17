@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import { BACKEND_URL } from "../../../backend/config";
 
 const AdministrativnoOsoblje = () => {
   const [data, setData] = useState([]);
@@ -10,7 +11,7 @@ const AdministrativnoOsoblje = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/uposlenici/administrativno-osoblje")
+      .get(`${BACKEND_URL}/uposlenici/administrativno-osoblje`)
       .then((res) => {
         const sortedData = res.data.data.slice().sort((a, b) => {
           return a.subjects.localeCompare(b.subjects);
