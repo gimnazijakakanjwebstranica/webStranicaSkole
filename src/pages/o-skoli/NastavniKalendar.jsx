@@ -1,5 +1,3 @@
-// NastavniKalendar.jsx
-import React from "react";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import documentPDF from "../../resources/documents/nastavni_kalendar.pdf";
@@ -27,7 +25,7 @@ const NastavniKalendar = () => {
         </header>
         <main className="mt-8 text-center">
           <p className="text-lg">
-            Nastavni kalendar možete instalirati klikom na donji link:
+            Nastavni kalendar možete preuzeti klikom na link ispod:
           </p>
           <button
             onClick={handleDownload}

@@ -10,11 +10,12 @@ const Uprava = () => {
 
   useEffect(() => {
     setLoading(true);
+    console.log(data);
     axios
       .get(`${BACKEND_URL}/uposlenici/uprava`)
       .then((res) => {
         const sortedData = res.data.data.slice().sort((a, b) => {
-          return a.subjects.localeCompare(b.subjects);
+          return a.job.localeCompare(b.job);
         });
 
         setData(sortedData.reverse());

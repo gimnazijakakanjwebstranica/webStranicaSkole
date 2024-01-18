@@ -45,7 +45,7 @@ const ListUprava = () => {
       .get(`${BACKEND_URL}/uposlenici/uprava`)
       .then((response) => {
         const sortedData = response.data.data.slice().sort((a, b) => {
-          return a.subjects.localeCompare(b.subjects);
+          return a.job.localeCompare(b.job);
         });
         setData(sortedData.reverse());
         setLoading(false);

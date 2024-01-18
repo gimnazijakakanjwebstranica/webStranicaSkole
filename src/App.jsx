@@ -1,6 +1,8 @@
 import { useRoutes } from "react-router-dom";
 import "./App.css";
 
+import NotFound from "./pages/NotFound";
+
 import Home from "./pages/Home";
 import AdminPanel from "./pages/admin/AdminPanel";
 
@@ -38,6 +40,7 @@ import AdminOSkoli from "./pages/admin/AdminOSkoli";
 
 function App() {
   const routeResult = useRoutes([
+    { path: "*", element: <NotFound /> },
     { path: "/", element: <Home /> },
     { path: "/admin-panel", element: <AdminPanel /> },
     { path: "/za-ucenike/sekcije", element: <Sekcije /> },

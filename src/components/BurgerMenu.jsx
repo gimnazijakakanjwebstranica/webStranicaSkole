@@ -45,7 +45,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
           <div>
             <div className="flex cursor-pointer">
               <MdArrowDropDown className="pt-1" />
-              <h>ZA UČENIKE</h>
+              <h1>ZA UČENIKE</h1>
             </div>
             <ul className="z-10 pl-4 text-sm bg-white pb-3">
               <li>
@@ -72,7 +72,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
               </li>
               <li>
                 <Link
-                  to="/za-ucenike/izvod-iz-pravila-gimnazije"
+                  to="/za-ucenike/uputstvo-za-izradu-maturskih-radova"
                   className="hover:text-blue-400"
                 >
                   Uputstvo za izradu maturskih radova
@@ -84,7 +84,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
           <div>
             <div className="flex cursor-pointer">
               <MdArrowDropDown className="pt-1" />
-              <h>ZA RODITELJE</h>
+              <h1>ZA RODITELJE</h1>
             </div>
 
             <ul className="z-10 text-sm bg-white pl-4 pb-3">
@@ -236,7 +236,6 @@ const BurgerMenu = ({ isOpen, onClose }) => {
                   Nastavni kalendar
                 </Link>
               </li>
-              
             </ul>
           </div>
         </div>

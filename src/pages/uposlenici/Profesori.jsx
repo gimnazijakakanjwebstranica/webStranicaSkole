@@ -17,6 +17,7 @@ const Profesori = () => {
           return a.subjects.localeCompare(b.subjects);
         });
 
+      
         setData(sortedData.reverse());
         setLoading(false);
       })
