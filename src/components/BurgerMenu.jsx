@@ -203,14 +203,6 @@ const BurgerMenu = ({ isOpen, onClose }) => {
 
             <ul className="z-10 text-sm bg-white pl-4 pb-3">
               <li>
-                <Link
-                  to="/o-skoli/rijec-direktora"
-                  className="hover:text-blue-400"
-                >
-                  Riječ direktora
-                </Link>
-              </li>
-              <li>
                 <Link to="/o-skoli/historijat" className="hover:text-blue-400">
                   Historijat
                 </Link>

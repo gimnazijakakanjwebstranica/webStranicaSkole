@@ -25,7 +25,6 @@ import Profesori from "./pages/uposlenici/Profesori";
 import AdministrativnoOsoblje from "./pages/uposlenici/AdministrativnoOsoblje";
 import PomocnoTehnickoOsoblje from "./pages/uposlenici/PomocnoTehnickoOsoblje";
 
-import RijecDirektora from "./pages/o-skoli/RijecDirektora";
 import Historijat from "./pages/o-skoli/Historijat";
 import Maturanti from "./pages/o-skoli/Maturanti";
 import UceniciGeneracije from "./pages/o-skoli/UceniciGeneracije";
@@ -92,7 +91,6 @@ function App() {
       path: "/uposlenici/pomocno-tehnicko-osoblje",
       element: <PomocnoTehnickoOsoblje />,
     },
-    { path: "/o-skoli/rijec-direktora", element: <RijecDirektora /> },
     { path: "/o-skoli/historijat", element: <Historijat /> },
     { path: "/o-skoli/maturanti", element: <Maturanti /> },
     { path: "/o-skoli/ucenici-generacije", element: <UceniciGeneracije /> },

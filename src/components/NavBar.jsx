@@ -210,13 +210,6 @@ const NavBar = () => {
               </div>
 
               <div className="absolute hidden group-hover:block bg-white p-2 max-w-[600px] w-max shadow-lg">
-                <Link
-                  to="/o-skoli/rijec-direktora"
-                  className="hover:text-blue-400"
-                >
-                  Riječ direktora
-                </Link>
-                <br />
                 <Link to="/o-skoli/historijat" className="hover:text-blue-400">
                   Historijat
                 </Link>
