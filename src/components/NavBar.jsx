@@ -3,11 +3,10 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { MdArrowDropDown } from "react-icons/md";
 import { CiMenuBurger } from "react-icons/ci";
-import logoOpcine from "../resources/photos/logoOpcine.png";
+import SkolaLogo from "../resources/logos/SkolaLogo.jpg";
 import "../index.css";
 import { useState, useEffect } from "react";
 import BurgerMenu from "./BurgerMenu";
-
 
 const NavBar = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -20,7 +19,7 @@ const NavBar = () => {
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
-  
+
   useEffect(() => {
     window.addEventListener("resize", handleResize);
 
@@ -29,14 +28,13 @@ const NavBar = () => {
     };
   }, []);
 
-  
   return (
     <div className="font-link">
       {windowWidth > 700 ? (
         <>
           <div className="text-l pt-5 pb-6 p-6 border-b-[1px]">
             <div className=" flex justify-center ml-[110px] gap-10">
-              <div className="pt-5 pb-3 p-6 flex align-middle">
+              <div className="pt-5 pb-3 p-6 flex items-center">
                 <div className="p-3 pl-4">
                   <FaPhoneAlt
                     style={{ color: "blue", fontSize: "20px" }}
@@ -50,10 +48,12 @@ const NavBar = () => {
               </div>
 
               <div className="pt-5 pb-3 p-6 flex justify-center items-center align-middle">
-                <img src={logoOpcine} className="w-12" />
+                <Link to={"/"} className="hover:text-blue-400">
+                  <img src={SkolaLogo} className="w-[100px]" />
+                </Link>
               </div>
 
-              <div className="pt-5 pb-3 p-6 flex align-middle">
+              <div className="pt-5 pb-3 p-6 flex items-center">
                 <div className="p-2 pl-4">
                   <IoIosMail style={{ color: "orange", fontSize: "2em" }} />
                 </div>
@@ -247,7 +247,7 @@ const NavBar = () => {
             </div>
 
             <div className="pt-5 pb-3 pl-3 pr-3 text-center flex justify-center items-center align-middle">
-              <img src={logoOpcine} className="w-auto h-auto sm:w-[25px]" />
+              <img src={SkolaLogo} className="w-[100px]" />
             </div>
 
             <div className="block">

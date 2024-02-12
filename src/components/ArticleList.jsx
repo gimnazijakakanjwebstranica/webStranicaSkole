@@ -3,6 +3,7 @@ import Spinner from "./Spinner.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../../backend/config.js";
+import SectionWrapper from "../hoc/SectionWrapper.jsx";
 
 const ArticleList = () => {
   const [data, setData] = useState([]);
@@ -26,7 +27,7 @@ const ArticleList = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="max-w-2xl w-full">
+        <div className="max-w-2xl ml-0 lg:ml-[-50px] w-full">
           <div>
             {data.map((article, index) => (
               <div key={index} className="w-full mb-4">
@@ -45,4 +46,4 @@ const ArticleList = () => {
   );
 };
 
-export default ArticleList;
+export default SectionWrapper(ArticleList);
