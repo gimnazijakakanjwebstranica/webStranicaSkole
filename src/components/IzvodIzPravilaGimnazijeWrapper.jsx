@@ -1,8 +1,6 @@
 import documentPDFFirst from "../resources/documents/PRAVILA_prečišćeni_tekst.pdf";
 import documentPDFSecond from "../resources/documents/pravilnik_o_kućnom_redu_s_etičkim_kodeksom.pdf";
 
-import SectionWrapper from "../hoc/SectionWrapper";
-
 const IzvodIzPravilaGimnazije = () => {
   const handleDownloadFirst = () => {
     const pdfUrl = documentPDFFirst;
@@ -52,4 +50,4 @@ const IzvodIzPravilaGimnazije = () => {
   );
 };
 
-export default SectionWrapper(IzvodIzPravilaGimnazije);
+export default IzvodIzPravilaGimnazije

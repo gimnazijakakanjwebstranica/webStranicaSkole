@@ -4,7 +4,6 @@ import Spinner from "../components/Spinner";
 import { BACKEND_URL } from "../../backend/config";
 import { useEffect, useState } from "react";
 
-import SectionWrapper from "../hoc/SectionWrapper";
 
 const TerminiVannastavnihAktivnostiWrapper = () => {
 
@@ -64,4 +63,4 @@ const TerminiVannastavnihAktivnostiWrapper = () => {
   );
 };
 
-export default SectionWrapper(TerminiVannastavnihAktivnostiWrapper);
+export default TerminiVannastavnihAktivnostiWrapper

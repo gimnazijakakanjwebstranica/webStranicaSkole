@@ -4,7 +4,6 @@ import ImageModal from "../components/ImageModal";
 import { BACKEND_URL } from "../../backend/config";
 import Spinner from "./Spinner";
 
-import SectionWrapper from "../hoc/SectionWrapper";
 
 const SekcijeWrapper = () => {
   const [showModal, setShowModal] = useState(false);
@@ -61,4 +60,4 @@ const SekcijeWrapper = () => {
   );
 };
 
-export default SectionWrapper(SekcijeWrapper);
+export default SekcijeWrapper
