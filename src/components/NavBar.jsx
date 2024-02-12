@@ -48,7 +48,7 @@ const NavBar = () => {
               </div>
 
               <div className="pt-5 pb-3 p-6 flex justify-center items-center align-middle">
-                <Link to={"/"} className="hover:text-blue-400">
+                <Link to={"/"} >
                   <img src={SkolaLogo} className="w-[100px]" />
                 </Link>
               </div>
@@ -247,7 +247,9 @@ const NavBar = () => {
             </div>
 
             <div className="pt-5 pb-3 pl-3 pr-3 text-center flex justify-center items-center align-middle">
-              <img src={SkolaLogo} className="w-[100px]" />
+              <Link to={"/"} >
+                <img src={SkolaLogo} className="w-[100px]" />
+              </Link>
             </div>
 
             <div className="block">
