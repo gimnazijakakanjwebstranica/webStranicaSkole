@@ -28,7 +28,7 @@ const SectionWrapper = (Component) =>
     return (
       <section className="block mb-5  lg:flex lg:justify-evenly">
         <div className="w-full lg:w-1/5 mt-5">
-          <h1 className="text-center text-2xl font-semibold">Sponzori:</h1>
+         
           <div className="mt-4 flex gap-2 flex-wrap justify-center lg:block ">
             {sponzori1.map((sponzor, index) => (
               <img src={sponzor} key={index} className="h-[75px] mx-auto" />
@@ -37,7 +37,7 @@ const SectionWrapper = (Component) =>
         </div>
         <Component />
         <div className="w-full lg:w-1/5 lg:mt-5 mb-5">
-          <h1 className="text-center text-2xl font-semibold">Sponzori:</h1>
+       
           <div className="mt-4 flex flex-wrap justify-center lg:block">
             {sponzori2.map((sponzor, index) => (
               <img
