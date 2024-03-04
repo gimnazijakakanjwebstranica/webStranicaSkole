@@ -33,7 +33,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="container mx-auto text-center mt-4">
           <p className="text-sm">
-            &copy; 2023 - Sva prava zadržana -{" "}
+            &copy; 2024 - Sva prava zadržana -{" "}
             <a href="https://www.hodzicmirza.com" className="underline pr-1">
               Mirza Hodzic
             </a>

@@ -2,35 +2,69 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Spinner from "./Spinner";
 import NavBar from "./NavBar";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./Footer";
-import ImageViewer from "react-simple-image-viewer";
 import { CiClock1 } from "react-icons/ci";
+import { FaChevronLeft } from "react-icons/fa";
+import { FaChevronRight } from "react-icons/fa";
 import { BACKEND_URL } from "../../backend/config";
+import { IoClose } from "react-icons/io5";
+
+const MediaModal = ({ data, onClose }) => {
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+
+  const nextMedia = () => {
+    setCurrentMediaIndex((prevIndex) => (prevIndex === data.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const prevMedia = () => {
+    setCurrentMediaIndex((prevIndex) => (prevIndex === 0 ? data.length - 1 : prevIndex - 1));
+  };
+
+  return (
+    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-100">
+       <button
+        className="absolute top-2 z-50 right-2 p-2 cursor-pointer rounded-full text-3xl"
+        onClick={onClose}
+      > <IoClose /></button>
+      <div className=" max-h-screen max-w-screen">
+       
+        {data.map((media, index) => (
+          <div key={index} className={index === currentMediaIndex ? 'block' : 'hidden'}>
+            {media.type === 'image' && (
+              <div className="flex justify-center items-center h-full">
+                <img src={media.data} className="object-cover  h-full max-w-full" />
+              </div>
+            )}
+
+            {media.type === 'video' && (
+              <video controls className="w-11/12 mx-auto">
+                <source src={media.data} type="video/mp4" />
+                Vaš pretraživać ne podržava video.
+              </video>
+            )}
+          </div>
+        ))}
+        
+      </div>
+      <button className="absolute top-1/2 left-4 text-4xl  text-white " onClick={prevMedia}><FaChevronLeft /></button>
+      <button className="absolute top-1/2 right-4  text-white text-4xl" onClick={nextMedia}><FaChevronRight /></button>
+    </div>
+  );
+};
 
 const ArticlePage = () => {
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(false);
-  const [images, setImages] = useState([]);
-  const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const { id } = useParams();
 
-  const openImageViewer = useCallback((index) => {
-    setCurrentImage(index);
-    setIsViewerOpen(true);
-  }, []);
-
-  const closeImageViewer = () => {
-    setCurrentImage(0);
-    setIsViewerOpen(false);
-  };
-
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
+
   useEffect(() => {
     window.addEventListener("resize", handleResize);
 
@@ -45,8 +79,6 @@ const ArticlePage = () => {
       .get(`${BACKEND_URL}/novosti/${id}`)
       .then((res) => {
         setArticle(res.data);
-        if (res.data.images && Array.isArray(res.data.images))
-          setImages(res.data.images);
         setLoading(false);
       })
       .catch((err) => {
@@ -77,25 +109,37 @@ const ArticlePage = () => {
             <p>{article.body}</p>
           </div>
           <div className="ml-4 pt-3 flex flex-wrap">
-            {images &&
-              images.map((src, index) => (
-                <img
-                  src={src}
-                  onClick={() => openImageViewer(index)}
-                  key={index}
-                  className="m-1 cursor-pointer h-32 sm:block"
-                />
+            {article.images &&
+              article.images.map((item, index) => (
+                <div key={index} className="m-1 cursor-pointer">
+                  {item.type === 'image' && (
+                    <img
+                      src={item.data}
+                      onClick={() => setIsViewerOpen(true)}
+                      className="h-32 sm:block"
+                      alt={`Image ${index}`}
+                    />
+                  )}
+                  {item.type === 'video' && (
+                    <video
+                      className="h-32 sm:block"
+                      onClick={() => setIsViewerOpen(true)}
+                    >
+                      <source src={item.data} type="video/mp4" />
+                      Vaš pretraživać ne podržava video
+                    </video>
+                  )}
+                </div>
               ))}
 
-            {isViewerOpen && (
-              <ImageViewer
-                src={images}
-                currentIndex={currentImage}
-                disableScroll={false}
-                closeOnClickOutside={true}
-                onClose={closeImageViewer}
-              />
-            )}
+              {isViewerOpen && (
+                <MediaModal
+                  data={article.images}
+                  onClose={() => setIsViewerOpen(false)}
+                />
+              )}
+
+
           </div>
         </div>
       )}

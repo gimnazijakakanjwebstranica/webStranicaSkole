@@ -7,7 +7,7 @@ const Article = ({ id, title, date, images }) => {
       <div className="max-w-xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <Link to={`/novosti/${id}`}>
           {images ? (
-            <img className="rounded-t-lg hover:opacity-80" src={images[0]} />
+            <img className="rounded-t-lg hover:opacity-80" src={images[0].data} />
           ) : (
             <></>
           )}

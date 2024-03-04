@@ -51,19 +51,31 @@ const CreateArticleForm = () => {
   const handleDrop = (acceptedFiles) => {
     acceptedFiles.map((file, index) => {
       const reader = new FileReader();
-
+  
       reader.onload = () => {
-        setImages((prevImages) => {
-          const updatedImages = [...prevImages];
-          updatedImages[index] = reader.result;
-          return updatedImages;
-        });
+        if (file.type.startsWith('image')) {
+          setImages((prevImages) => [
+            ...prevImages,
+            { type: 'image', data: reader.result }
+          ]);
+        } else if (file.type.startsWith('video')) {
+         
+          setImages((prevImages) => [
+            ...prevImages,
+            {
+              type: 'video',
+              data: reader.result,
+              metadata: { filename: file.name, size: file.size, type: file.type },
+              reference: 'path/to/video/file' 
+            }
+          ]);
+        }
       };
-
+  
       reader.readAsDataURL(file);
     });
   };
-
+  
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
 
   return (
@@ -108,25 +120,34 @@ const CreateArticleForm = () => {
             <div className="cursor-pointer border border-gray-300 rounded-md p-2 flex items-center">
               <input {...getInputProps()} />
               <FaImages className="mr-2" />
-              <span>Ubaci slike</span>
+              <span>Ubaci slike/video</span>
             </div>
           </div>
           <div>
-            {images.length > 0 && (
-              <div>
-                <h3 className="font-medium mt-4 mb-2">Ubačene slike:</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {images.map((base64String, index) => (
-                    <img
-                      key={index}
-                      src={base64String}
-                      alt={`Uploaded ${index}`}
-                      className="w-full h-auto rounded-md"
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+          {images.length > 0 && (
+  <div>
+    <h3 className="font-medium mt-4 mb-2">Ubačene slike/video:</h3>
+    <div className="grid grid-cols-2 gap-4">
+      {images.map((media, index) => (
+        <div key={index}>
+          {media.type === 'image' ? (
+            <img
+              src={media.data}
+              alt={`Uploaded ${index}`}
+              className="w-full h-auto rounded-md"
+            />
+          ) : (
+            <video controls className="w-full h-auto rounded-md">
+              <source src={media.data} />
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
           </div>
           <button
             type="submit"
