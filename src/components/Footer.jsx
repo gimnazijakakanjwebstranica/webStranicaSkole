@@ -3,7 +3,7 @@ import { SiGmail } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <div className="bg-gray-800 text-white py-4">
+    <footer className=" bottom-0 w-full bg-gray-800 text-white py-4">
       <div className="container mx-auto">
         {/* Kontakt */}
         <div className="p-4">
@@ -43,7 +43,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 
