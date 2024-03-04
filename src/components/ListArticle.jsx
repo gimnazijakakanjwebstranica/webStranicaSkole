@@ -6,6 +6,8 @@ import { MdDelete } from "react-icons/md";
 import { FaLink } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BACKEND_URL } from "../../backend/config";
+import { MdEdit } from "react-icons/md";
+
 
 const ListArticle = () => {
   const [data, setData] = useState([]);
@@ -120,6 +122,8 @@ const ListArticle = () => {
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     <div className="flex justify-center gap-4">
+                      <Link to={`${article._id}`}><MdEdit style={{color:"yellow"}}/>
+                      </Link>
                       <button onClick={() => showModalToDelete(article._id)}>
                         <MdDelete
                           className="cursor-pointer"

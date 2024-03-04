@@ -36,6 +36,7 @@ import AdminArticle from "./pages/admin/AdminArticle";
 import AdminZaUcenike from "./pages/admin/AdminZaUcenike";
 import AdminZaRoditelje from "./pages/admin/AdminZaRoditelje";
 import AdminOSkoli from "./pages/admin/AdminOSkoli";
+import AdminEditArticle from "./pages/admin/AdminEditArticle";
 
 function App() {
   const routeResult = useRoutes([
@@ -103,6 +104,7 @@ function App() {
     { path: "/admin-panel/admin-uposlenici", element: <AdminEmployees /> },
     { path: "/admin-panel/admin-za-roditelje", element: <AdminZaRoditelje /> },
     { path: "/admin-panel/admin-o-skoli", element: <AdminOSkoli /> },
+    { path: "/admin-panel/admin-clanci/:id", element: <AdminEditArticle /> },
   ]);
 
   return routeResult;
