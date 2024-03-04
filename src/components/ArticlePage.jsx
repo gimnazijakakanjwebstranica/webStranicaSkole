@@ -26,7 +26,7 @@ const MediaModal = ({ data, onClose }) => {
        <button
         className="absolute top-2 z-50 right-2 p-2 cursor-pointer rounded-full text-3xl"
         onClick={onClose}
-      > <IoClose /></button>
+      > <IoClose style={{color:"gray"}}/></button>
       <div className=" max-h-screen max-w-screen">
        
         {data.map((media, index) => (
@@ -47,8 +47,8 @@ const MediaModal = ({ data, onClose }) => {
         ))}
         
       </div>
-      <button className="absolute top-1/2 left-4 text-4xl  text-white " onClick={prevMedia}><FaChevronLeft /></button>
-      <button className="absolute top-1/2 right-4  text-white text-4xl" onClick={nextMedia}><FaChevronRight /></button>
+      <button className="absolute top-1/2 left-4 text-4xl  text-white " onClick={prevMedia}><FaChevronLeft style={{color:"gray"}}/></button>
+      <button className="absolute top-1/2 right-4  text-white text-4xl" onClick={nextMedia}><FaChevronRight style={{color:"gray"}}/></button>
     </div>
   );
 };
