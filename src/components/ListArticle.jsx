@@ -103,7 +103,7 @@ const ListArticle = () => {
           <tbody>
             {data.map((article, index) => {
               return (
-                <tr key={article._id} className="h-8">
+                <tr key={article.id} className="h-8">
                   <td className="border border-slate-700 rounded-md text-center">
                     <p className="p-1">{data.length - index}</p>
                   </td>
@@ -115,16 +115,16 @@ const ListArticle = () => {
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     <p className="p-1 flex justify-center">
-                      <Link to={`/novosti/${article._id}`}>
+                      <Link to={`/novosti/${article.id}`}>
                         <FaLink />
                       </Link>
                     </p>
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     <div className="flex justify-center gap-4">
-                      <Link to={`${article._id}`}><MdEdit style={{color:"yellow"}}/>
+                      <Link to={`${article.id}`}><MdEdit style={{color:"yellow"}}/>
                       </Link>
-                      <button onClick={() => showModalToDelete(article._id)}>
+                      <button onClick={() => showModalToDelete(article.id)}>
                         <MdDelete
                           className="cursor-pointer"
                           style={{ color: "red" }}

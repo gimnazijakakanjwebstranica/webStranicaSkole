@@ -1,8 +1,13 @@
 import express from "express";
-import { Maturanti } from "../models/maturantiModel.js";
+import mysql from "mysql2/promise";
+import { LOGIN } from "../config.js";
 
 const router = express.Router();
 
+// MySQL connection configuration
+const pool = mysql.createPool(LOGIN);
+
+// Create a new maturant
 router.post("/", async (req, res) => {
   try {
     if (!req.body.images) {
@@ -10,25 +15,26 @@ router.post("/", async (req, res) => {
         message: "Unesi slike",
       });
     }
-    const newMaturanti = {
-      images: req.body.images,
-    };
+    const images = JSON.stringify(req.body.images);
+    const [result] = await pool.execute(
+      "INSERT INTO maturanti (images) VALUES (?)",
+      [images]
+    );
 
-    const maturanti = await Maturanti.create(newMaturanti);
-
-    return res.status(201).send(maturanti);
+    return res.status(201).send({ id: result.insertId, images });
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
   }
 });
 
+// Retrieve all maturants
 router.get("/", async (req, res) => {
   try {
-    const maturanti = await Maturanti.find({});
+    const [rows] = await pool.query("SELECT * FROM maturanti");
     return res.status(200).json({
-      count: maturanti.length,
-      data: maturanti,
+      count: rows.length,
+      data: rows,
     });
   } catch (err) {
     console.log(err.message);
@@ -36,16 +42,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Delete a maturant by ID
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Maturanti.findByIdAndDelete(id);
-    if (!result) res.status(404).send({ message: "Slika nije pronadena" });
+    const [result] = await pool.execute("DELETE FROM maturanti WHERE id = ?", [id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "Slika nije pronadena" });
+    }
 
     res.status(200).send({ message: "Uspjesno obrisano" });
   } catch (err) {
     console.log(err.message);
-    res.status(500).send(`Zahtjev neuspjesan ${err.message}`);
+    res.status(500).send({ message: `Zahtjev neuspjesan ${err.message}` });
   }
 });
+
 export default router;

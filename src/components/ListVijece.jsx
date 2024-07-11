@@ -133,7 +133,7 @@ const ListVijece = () => {
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     <div className="flex justify-center gap-4">
-                      <button onClick={() => showModalToDelete(image._id)}>
+                      <button onClick={() => showModalToDelete(image.id)}>
                         <MdDelete
                           className="cursor-pointer"
                           style={{ color: "red" }}

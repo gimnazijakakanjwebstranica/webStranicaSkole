@@ -32,7 +32,7 @@ const ArticleList = () => {
             {data.map((article, index) => (
               <div key={index} className="w-full mb-4">
                 <Article
-                  id={article._id}
+                  id={article.id}
                   title={article.title}
                   date={article.date}
                   images={article.images}

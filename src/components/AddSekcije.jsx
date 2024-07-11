@@ -20,6 +20,7 @@ const AddSekcije = () => {
     axios
       .post(`${BACKEND_URL}/za-ucenike/sekcije`, data)
       .then(() => {
+   
         alert("Uspjesno");
         setLoading(false);
       })

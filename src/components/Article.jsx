@@ -2,12 +2,13 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Article = ({ id, title, date, images }) => {
+  const imagesJSON = JSON.parse(images)
   return (
     <div className="font-link p-4">
       <div className="max-w-xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <Link to={`/novosti/${id}`}>
-          {images ? (
-            <img className="rounded-t-lg hover:opacity-80" src={images[0].data} />
+          {imagesJSON ? (
+            <img className="rounded-t-lg hover:opacity-80" src={imagesJSON[0].data} />
           ) : (
             <></>
           )}

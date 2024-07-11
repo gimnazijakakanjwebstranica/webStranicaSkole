@@ -3,9 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { FaImages } from "react-icons/fa";
 import axios from "axios";
 import Spinner from "./Spinner";
-import { Buffer } from "buffer";
 import { BACKEND_URL } from "../../backend/config";
-Buffer.from("anything", "base64");
 
 const CreateArticleForm = () => {
   const [title, setTitle] = useState("");
@@ -14,68 +12,69 @@ const CreateArticleForm = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const convertToDDMMYYYY = (inputDate) => {
-    const date = new Date(inputDate);
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = {
-      title: title,
-      date: convertToDDMMYYYY(date),
-      body: content,
-      images: images,
-    };
-
-    axios
-      .post(`${BACKEND_URL}/novosti`, data)
-      .then(() => {
-        alert("Uspjesno");
-        setLoading(false);
-      })
-      .catch((err) => {
-        alert(err.message);
-        setLoading(false);
-      });
-
-    setTitle("");
-    setDate("");
-    setContent("");
-    setImages([]);
-  };
-
-  const handleDrop = (acceptedFiles) => {
-    acceptedFiles.map((file, index) => {
-      const reader = new FileReader();
   
-      reader.onload = () => {
-        if (file.type.startsWith('image')) {
-          setImages((prevImages) => [
-            ...prevImages,
-            { type: 'image', data: reader.result }
-          ]);
-        } else if (file.type.startsWith('video')) {
-         
-          setImages((prevImages) => [
-            ...prevImages,
-            {
-              type: 'video',
-              data: reader.result,
-              metadata: { filename: file.name, size: file.size, type: file.type },
-              reference: 'path/to/video/file' 
-            }
-          ]);
-        }
+    try {
+      setLoading(true);
+  
+      // Convert image files to Base64 strings
+      const imagesBase64 = await Promise.all(
+        images.map(async (image) => {
+          const base64Data = await readFileAsBase64(image.file);
+          return {
+            type: image.file.type,
+            data: base64Data,
+          };
+        })
+      );
+  
+      // Create the data object
+      const data = {
+        title,
+        date,
+        body: content,
+        images: imagesBase64,
       };
+
+      // Send the request
+      await axios.post(`${BACKEND_URL}/novosti`, data);
   
+      alert("Uspjesno");
+      setLoading(false);
+      setTitle("");
+      setDate("");
+      setContent("");
+      setImages([]);
+    } catch (error) {
+      alert(error.message);
+      setLoading(false);
+    }
+  };
+  
+  const readFileAsBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
       reader.readAsDataURL(file);
     });
   };
-  
+
+
+  const handleDrop = (acceptedFiles) => {
+    const updatedMediaFiles = acceptedFiles.map((file) => ({
+      file,
+      preview: URL.createObjectURL(file), // For preview purposes
+      type: file.type.startsWith('image') ? 'image' : 'video', // Determine the type of file
+    }));
+    setImages((prevMediaFiles) => [...prevMediaFiles, ...updatedMediaFiles]);
+  };
+
+  const handleRemoveImage = (index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
+
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
 
   return (
@@ -116,7 +115,7 @@ const CreateArticleForm = () => {
             ></textarea>
           </div>
           <div {...getRootProps()} className="flex items-center space-x-2">
-            <label className="block mb-1 font-medium">Slike:</label>
+            <label className="block mb-1 font-medium">Slike/Video:</label>
             <div className="cursor-pointer border border-gray-300 rounded-md p-2 flex items-center">
               <input {...getInputProps()} />
               <FaImages className="mr-2" />
@@ -124,30 +123,29 @@ const CreateArticleForm = () => {
             </div>
           </div>
           <div>
-          {images.length > 0 && (
-  <div>
-    <h3 className="font-medium mt-4 mb-2">Ubačene slike/video:</h3>
-    <div className="grid grid-cols-2 gap-4">
-      {images.map((media, index) => (
-        <div key={index}>
-          {media.type === 'image' ? (
-            <img
-              src={media.data}
-              alt={`Uploaded ${index}`}
-              className="w-full h-auto rounded-md"
-            />
-          ) : (
-            <video controls className="w-full h-auto rounded-md">
-              <source src={media.data} />
-              Your browser does not support the video tag.
-            </video>
-          )}
-        </div>
-      ))}
-    </div>
-  </div>
-)}
-
+            {images.length > 0 && (
+              <div>
+                <h3 className="font-medium mt-4 mb-2">Ubačene slike/video:</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {images.map((image, index) => (
+                    <div key={index} className="relative">
+                      <img
+                        src={image.preview}
+                        alt={`Uploaded ${index}`}
+                        className="w-full h-auto rounded-md"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="bg-red-500 text-white font-bold py-1 px-2 rounded-md mt-2 absolute top-0 right-2"
+                      >
+                        X
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           <button
             type="submit"

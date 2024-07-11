@@ -43,7 +43,7 @@ const ListVannastavneAktivnosti = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `${BACKEND_URL}/za-ucenike/tremini-vannastavnih-aktivnosti/${id}`
+        `${BACKEND_URL}/za-ucenike/termini-vannastavnih-aktivnosti/${id}`
       );
       setLoading(false);
       window.location.reload();
@@ -107,15 +107,16 @@ const ListVannastavneAktivnosti = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((image, index) => {
+            {data.map((item, index) => {
+              const images = JSON.parse(item.images);
               return (
-                <tr key={image._id} className="h-8">
+                <tr key={item.id} className="h-8">
                   <td className="border border-slate-700 rounded-md text-center">
                     <p className="p-1">{index + 1}</p>
                   </td>
 
                   <td className="border border-slate-700 rounded-md text-center">
-                    {image.images.map((imageUrl, i) => (
+                    {images.map((imageUrl, i) => (
                       <div key={i}>
                         <img
                           src={imageUrl}
@@ -133,7 +134,7 @@ const ListVannastavneAktivnosti = () => {
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     <div className="flex justify-center gap-4">
-                      <button onClick={() => showModalToDelete(image._id)}>
+                      <button onClick={() => showModalToDelete(item.id)}>
                         <MdDelete
                           className="cursor-pointer"
                           style={{ color: "red" }}

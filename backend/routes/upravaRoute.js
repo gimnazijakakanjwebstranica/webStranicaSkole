@@ -1,8 +1,13 @@
 import express from "express";
-import { Uprava } from "../models/upravaModel.js";
+import mysql from "mysql2/promise";
+import {LOGIN} from "../config.js"
 
 const router = express.Router();
 
+// MySQL connection configuration
+const pool = mysql.createPool(LOGIN);
+
+// Create a new employee
 router.post("/", async (req, res) => {
   try {
     if (!req.body.full_name || !req.body.job) {
@@ -15,21 +20,25 @@ router.post("/", async (req, res) => {
       job: req.body.job,
     };
 
-    const employee = await Uprava.create(newEmployee);
+    const [result] = await pool.execute(
+      "INSERT INTO uprava (full_name, job) VALUES (?, ?)",
+      [newEmployee.full_name, newEmployee.job]
+    );
 
-    return res.status(201).send(employee);
+    return res.status(201).send({ id: result.insertId, ...newEmployee });
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
   }
 });
 
+// Retrieve all employees
 router.get("/", async (req, res) => {
   try {
-    const employee = await Uprava.find({});
+    const [rows] = await pool.query("SELECT * FROM uprava");
     return res.status(200).json({
-      count: employee.length,
-      data: employee,
+      count: rows.length,
+      data: rows,
     });
   } catch (err) {
     console.log(err.message);
@@ -37,16 +46,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Delete an employee by ID
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Uprava.findByIdAndDelete(id);
-    if (!result) res.status(404).send({ message: "Profesor nije pronaden" });
+    const [result] = await pool.execute("DELETE FROM uprava WHERE id = ?", [id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "Zaposlenik nije pronaden" });
+    }
 
     res.status(200).send({ message: "Uspjesno obrisano" });
   } catch (err) {
     console.log(err.message);
-    res.status(500).send(`Zahtjev neuspjesan ${err.message}`);
+    res.status(500).send({ message: `Zahtjev neuspjesan ${err.message}` });
   }
 });
+
 export default router;

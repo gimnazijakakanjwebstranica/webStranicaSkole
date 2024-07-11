@@ -42,9 +42,11 @@ const Maturanti = () => {
           <Spinner />
         ) : (
           <div className="font-link flex-block justify-center">
-            {data.map((item, index) => (
+            {data.map((item, index) => {
+              const images = JSON.parse(item.images)
+              return(
               <div key={index}>
-                {item.images.map((imageUrl, i) => (
+                {images.map((imageUrl, i) => (
                   <div key={i} className="text-center">
                     <img
                       src={imageUrl}
@@ -60,7 +62,8 @@ const Maturanti = () => {
                   </div>
                 ))}
               </div>
-            ))}
+              )
+})}
           </div>
         )}
       </div>

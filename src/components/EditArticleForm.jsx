@@ -4,8 +4,7 @@ import { FaImages } from "react-icons/fa";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { BACKEND_URL } from "../../backend/config";
-import { Buffer } from "buffer"; 
-
+import { Buffer } from "buffer";
 
 Buffer.from("anything", "base64");
 
@@ -15,36 +14,31 @@ const EditArticleForm = ({ articleId }) => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
-   
- 
+
   useEffect(() => {
-  
-    axios.get(`${BACKEND_URL}/novosti/${articleId}`)
-      .then(response => {
+    axios
+      .get(`${BACKEND_URL}/novosti/${articleId}`)
+      .then((response) => {
         const { title, date, body, images } = response.data;
         setTitle(title);
         setDate(convertToYYYYMMDD(date));
-      
         setContent(body);
-        setImages(images);
+        setImages(JSON.parse(images));
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching article:", error);
       });
   }, [articleId]);
 
   const convertToYYYYMMDD = (inputDate) => {
-    
     const day = inputDate.substring(0, 2);
     const month = inputDate.substring(3, 5);
-    const year = inputDate.substring(6,10);
+    const year = inputDate.substring(6, 10);
 
     const yyyyMMddDate = `${year}-${month}-${day}`;
 
     return yyyyMMddDate;
-};
-
-
+  };
 
   const convertToDDMMYYYY = (inputDate) => {
     const date = new Date(inputDate);
@@ -56,52 +50,55 @@ const EditArticleForm = ({ articleId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const data = {
       title: title,
       date: convertToDDMMYYYY(date),
       body: content,
-      images: images,
+      images: JSON.stringify(images), // Convert images array to JSON string
     };
-    
+
     axios
       .put(`${BACKEND_URL}/novosti/${articleId}`, data)
       .then(() => {
         alert("Uspjesno ažurirano");
         setLoading(false);
-       
       })
       .catch((err) => {
         alert(err.message);
         setLoading(false);
       });
 
-      document.location("/admin-panel/admin-clanci")
+    document.location("/admin-panel/admin-clanci");
   };
 
   const handleDrop = (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
       reader.onload = () => {
-        if (file.type.startsWith('image')) {
+        if (file.type.startsWith("image")) {
           setImages((prevImages) => [
             ...prevImages,
-            { type: 'image', data: reader.result }
+            { type: "image", data: reader.result },
           ]);
-        } else if (file.type.startsWith('video')) {
+        } else if (file.type.startsWith("video")) {
           setImages((prevImages) => [
             ...prevImages,
             {
-              type: 'video',
+              type: "video",
               data: reader.result,
               metadata: { filename: file.name, size: file.size, type: file.type },
-              reference: 'path/to/video/file' 
-            }
+              reference: "path/to/video/file",
+            },
           ]);
         }
       };
       reader.readAsDataURL(file);
     });
+  };
+
+  const handleRemoveImage = (index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop: handleDrop });
@@ -157,8 +154,8 @@ const EditArticleForm = ({ articleId }) => {
                 <h3 className="font-medium mt-4 mb-2">Ubačene slike/video:</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {images.map((media, index) => (
-                    <div key={index}>
-                      {media.type === 'image' ? (
+                    <div key={index} className="relative">
+                      {media.type === "image" ? (
                         <img
                           src={media.data}
                           alt={`Uploaded ${index}`}
@@ -170,6 +167,13 @@ const EditArticleForm = ({ articleId }) => {
                           Your browser does not support the video tag.
                         </video>
                       )}
+                      <button
+                        type="button "
+                        onClick={() => handleRemoveImage(index)}
+                        className="bg-red-500 text-white font-bold py-1 px-2 rounded-md mt-2 absolute top-0 right-2"
+                      >
+                        X
+                      </button>
                     </div>
                   ))}
                 </div>

@@ -118,7 +118,7 @@ const ListUceniciGeneracije = () => {
                   </td>
                   <td className="border border-slate-700 rounded-md text-center">
                     <div className="flex justify-center gap-4">
-                      <button onClick={() => showModalToDelete(student._id)}>
+                      <button onClick={() => showModalToDelete(student.id)}>
                         <MdDelete
                           className="cursor-pointer"
                           style={{ color: "red" }}

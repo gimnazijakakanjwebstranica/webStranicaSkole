@@ -1,8 +1,13 @@
 import express from "express";
-import { Sekcije } from "../models/sekcijeModel.js";
+import mysql from "mysql2/promise";
+import { LOGIN } from "../config.js";
 
 const router = express.Router();
 
+// MySQL connection configuration
+const pool = mysql.createPool(LOGIN);
+
+// Create a new entry
 router.post("/", async (req, res) => {
   try {
     if (!req.body.images) {
@@ -10,25 +15,27 @@ router.post("/", async (req, res) => {
         message: "Unesi slike",
       });
     }
-    const newProfessor = {
-      images: req.body.images,
-    };
 
-    const sekcije = await Sekcije.create(newProfessor);
+    const images = JSON.stringify(req.body.images);
+    const [result] = await pool.execute(
+      "INSERT INTO sekcije(images) VALUES (?)",
+      [images]
+    );
 
-    return res.status(201).send(sekcije);
+    return res.status(201).send({ id: result.insertId, images });
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
   }
 });
 
+// Retrieve all entries
 router.get("/", async (req, res) => {
   try {
-    const sekcije = await Sekcije.find({});
+    const [rows] = await pool.query("SELECT * FROM sekcije");
     return res.status(200).json({
-      count: sekcije.length,
-      data: sekcije,
+      count: rows.length,
+      data: rows,
     });
   } catch (err) {
     console.log(err.message);
@@ -36,16 +43,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Delete an entry by id
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Sekcije.findByIdAndDelete(id);
-    if (!result) res.status(404).send({ message: "Slika nije pronadena" });
+    const [result] = await pool.execute("DELETE FROM sekcije WHERE id = ?", [id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "Slika nije pronadena" });
+    }
 
     res.status(200).send({ message: "Uspjesno obrisano" });
   } catch (err) {
     console.log(err.message);
-    res.status(500).send(`Zahtjev neuspjesan ${err.message}`);
+    res.status(500).send({ message: `Zahtjev neuspjesan ${err.message}` });
   }
 });
+
 export default router;

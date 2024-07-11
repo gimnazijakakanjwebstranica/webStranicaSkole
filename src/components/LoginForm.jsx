@@ -30,7 +30,7 @@ const LoginForm = ({ handleLoginForm }) => {
       setUsername("");
       setPassword("");
     } catch (error) {
-      console.error(error.message);
+      console.error("Login failed:", error.message);
     }
   };
 
@@ -40,13 +40,12 @@ const LoginForm = ({ handleLoginForm }) => {
     if (localToken) {
       // Send a request to the server to validate the token
       axios
-        .post(`${BACKEND_URL}/admin/verify-token`, null,{
+        .post(`${BACKEND_URL}/admin/verify-token`, null, {
           headers: {
             "x-access-token": localToken,
           },
         })
         .then((res) => {
-          // Assuming the server responds with a data field `verifyValid` to indicate token validity
           const { verifyValid } = res.data;
 
           if (verifyValid) {
@@ -55,15 +54,15 @@ const LoginForm = ({ handleLoginForm }) => {
           } else {
             // Token is invalid or expired, perform logout action
             console.error("Token verification failed.");
-            // Optionally, you can clear the token from local storage here
             localStorage.removeItem("token");
           }
         })
         .catch((error) => {
           console.error("Token verification failed:", error);
+          localStorage.removeItem("token");
         });
     }
-  }, []);
+  }, [handleLoginForm]);
 
   return (
     <div className="flex justify-center items-center h-screen font-link">

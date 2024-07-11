@@ -1,7 +1,7 @@
 import express from "express";
-import { PORT, MONGO_URI } from "./config.js";
+import { PORT } from "./config.js";
+import mysql from "mysql2";
 import cors from "cors";
-import mongoose from "mongoose";
 import articleRoute from "./routes/articleRoute.js";
 import adminRoute from "./routes/adminRoute.js";
 import professorRoute from "./routes/professorRoute.js";
@@ -18,7 +18,7 @@ import bodyParser from "body-parser";
 
 const app = express();
 
-app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.json({ limit: "100mb" }));
 
 //za policy
 app.use(cors());
@@ -47,7 +47,20 @@ app.use("/za-roditelje/termini-individualnih-konsultacija", informacijeRoute);
 app.use("/o-skoli/ucenici-generacije", ucenikGeneracijeRoute);
 app.use("/o-skoli/maturanti", maturantiRoute);
 
-mongoose
+
+mysql.createConnection({
+  host:"127.0.0.1",
+  user:"root",
+  password:"",
+  database:"gimnazija_mushin_rizvic_kakanj"
+});
+
+
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`App is listening on port ${PORT}`);
+});
+
+/*mongoose
   .connect(MONGO_URI)
   .then(() => {
     console.log("App conected to database");
@@ -56,3 +69,4 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
+  */

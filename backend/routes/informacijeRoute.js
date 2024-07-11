@@ -1,8 +1,13 @@
 import express from "express";
-import { Informacije } from "../models/informacijeModel.js";
+import mysql from "mysql2/promise";
+import {LOGIN} from "../config.js"
 
 const router = express.Router();
 
+// MySQL connection configuration
+const pool = mysql.createPool(LOGIN);
+
+// Create a new entry
 router.post("/", async (req, res) => {
   try {
     if (!req.body.images) {
@@ -10,22 +15,29 @@ router.post("/", async (req, res) => {
         message: "Unesi slike",
       });
     }
-    const newInformacije = {
-      images: req.body.images,
-    };
 
-    const informacije = await Informacije.create(newInformacije);
+    const images = JSON.stringify(req.body.images);  // Store images as a JSON string
 
-    return res.status(201).send(informacije);
+    const [result] = await pool.execute(
+      "INSERT INTO informacije (images) VALUES (?)",
+      [images]
+    );
+
+    return res.status(201).send({ id: result.insertId, images: req.body.images });
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
   }
 });
 
+// Retrieve all entries
 router.get("/", async (req, res) => {
   try {
-    const informacije = await Informacije.find({});
+    const [rows] = await pool.query("SELECT * FROM informacije");
+    const informacije = rows.map(row => ({
+      ...row,
+      images: JSON.parse(row.images)  // Parse the JSON string back to an array
+    }));
     return res.status(200).json({
       count: informacije.length,
       data: informacije,
@@ -36,16 +48,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Delete an entry by id
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Informacije.findByIdAndDelete(id);
-    if (!result) res.status(404).send({ message: "Slika nije pronadena" });
+    const [result] = await pool.execute("DELETE FROM informacije WHERE id = ?", [id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "Slika nije pronadena" });
+    }
 
     res.status(200).send({ message: "Uspjesno obrisano" });
   } catch (err) {
     console.log(err.message);
-    res.status(500).send(`Zahtjev neuspjesan ${err.message}`);
+    res.status(500).send({ message: `Zahtjev neuspjesan ${err.message}` });
   }
 });
+
 export default router;

@@ -1,8 +1,13 @@
 import express from "express";
-import { UceniciGeneracije } from "../models/ucenikGeneracijeModel.js";
+import mysql from "mysql2/promise";
+import {LOGIN} from "../config.js"
 
 const router = express.Router();
 
+// MySQL connection configuration
+const pool = mysql.createPool(LOGIN);
+
+// Create a new student
 router.post("/", async (req, res) => {
   try {
     if (!req.body.name || !req.body.last_name || !req.body.year) {
@@ -16,21 +21,25 @@ router.post("/", async (req, res) => {
       year: req.body.year,
     };
 
-    const student = await UceniciGeneracije.create(newStudent);
+    const [result] = await pool.execute(
+      "INSERT INTO ucenici_generacije (name, last_name, year) VALUES (?, ?, ?)",
+      [newStudent.name, newStudent.last_name, newStudent.year]
+    );
 
-    return res.status(201).send(student);
+    return res.status(201).send({ id: result.insertId, ...newStudent });
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
   }
 });
 
+// Retrieve all students
 router.get("/", async (req, res) => {
   try {
-    const students = await UceniciGeneracije.find({});
+    const [rows] = await pool.query("SELECT * FROM ucenici_generacije");
     return res.status(200).json({
-      count: students.length,
-      data: students,
+      count: rows.length,
+      data: rows,
     });
   } catch (err) {
     console.log(err.message);
@@ -38,16 +47,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Delete a student by ID
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await UceniciGeneracije.findByIdAndDelete(id);
-    if (!result) res.status(404).send({ message: "Učenik nije pronaden" });
+    const [result] = await pool.execute("DELETE FROM ucenici_generacije WHERE id = ?", [id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "Učenik nije pronaden" });
+    }
 
     res.status(200).send({ message: "Uspjesno obrisano" });
   } catch (err) {
     console.log(err.message);
-    res.status(500).send(`Zahtjev neuspjesan ${err.message}`);
+    res.status(500).send({ message: `Zahtjev neuspjesan ${err.message}` });
   }
 });
+
 export default router;

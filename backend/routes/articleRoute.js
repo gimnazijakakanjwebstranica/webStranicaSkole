@@ -1,37 +1,48 @@
+// Import necessary modules
 import express from "express";
-import { Article } from "../models/articleModel.js";
+import mysql from "mysql2/promise"; // mysql2/promise for async/await support
+import { LOGIN } from "../config.js";
 
 const router = express.Router();
-//kreiraj clanak
+
+// MySQL connection configuration
+const pool = mysql.createPool(LOGIN);
+
+// Create article
 router.post("/", async (req, res) => {
   try {
-    if (!req.body.title || !req.body.date || !req.body.body) {
+    const { title, date, body, images } = req.body;
+
+    if (!title || !date || !body || !images) {
       return res.status(400).send({
-        message: "Unesi zadata polja: naslov, datum i tekst",
+        message: "Unesi zadata polja: naslov, datum, tekst i slike",
       });
     }
-    const newArticle = {
-      title: req.body.title,
-      date: req.body.date,
-      body: req.body.body,
-      images: req.body.images,
-    };
+   
+    // Stringify the images object to JSON string
+    const imagesJson = JSON.stringify(images);
 
-    const article = await Article.create(newArticle);
 
-    return res.status(201).send(article);
+    // Insert query
+    const query = "INSERT INTO clanci (title, date, body, images) VALUES (?, ?, ?, ?)";
+    const [result] = await pool.query(query, [title, date, body, imagesJson]);
+
+    return res.status(201).send({ id: result.insertId });
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
   }
 });
-//ispisi sve clanke
+
+// Get all articles
 router.get("/", async (req, res) => {
   try {
-    const articles = await Article.find({});
+    
+    const [rows] = await pool.query("SELECT * FROM clanci");
+
     return res.status(200).json({
-      count: articles.length,
-      data: articles,
+      count: rows.length,
+      data: rows,
     });
   } catch (err) {
     console.log(err.message);
@@ -39,52 +50,72 @@ router.get("/", async (req, res) => {
   }
 });
 
-//ispisi clanak po id-u
+// Get article by ID
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    const article = await Article.findOne({ _id: id });
-    return res.status(200).json(article);
+
+    // Select query with parameterized query
+    const [rows] = await pool.query("SELECT * FROM clanci WHERE id = ?", [id]);
+
+    
+    if (rows.length === 0) {
+      return res.status(404).send({ message: "Clanak nije pronaden" });
+    }
+
+    return res.status(200).json(rows[0]);
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
   }
 });
 
-//korigovanje clanka
+
 router.put("/:id", async (req, res) => {
   try {
-    if (!req.body.title || !req.body.date || !req.body.body) {
-      res.status(400).send("Unesi zadata polja: naslov, datum i tekst");
-    }
     const { id } = req.params;
+    const { title, date, body, images } = req.body;
 
-    //dodacvanje novog dijela
-    const updatedArticle = await Article.findByIdAndUpdate(id, req.body);
-
-    if (!updatedArticle) {
-      res.status(404).send({ message: "Clanak nije pronaden" });
+    if (!title || !date || !body) {
+      return res.status(400).send("Unesi zadata polja: naslov, datum i tekst");
     }
 
-    res.status(200).send({ message: "Korigovanje clanka uspjesno" });
+    // Stringify the images array to JSON string
+    const imagesJson = JSON.stringify(images);
+
+    // Update query
+    const query = "UPDATE clanci SET title = ?, date = ?, body = ?, images = ? WHERE id = ?";
+    const [result] = await pool.query(query, [title, date, body, imagesJson, id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "Clanak nije pronaden" });
+    }
+
+    return res.status(200).send({ message: "Korigovanje clanka uspjesno" });
   } catch (err) {
     console.log(err.message);
     res.status(500).send(`Zahtjev neuspjesan, ${err.message}`);
   }
 });
 
-//brisanje clanka
+// Delete article by ID
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Article.findByIdAndDelete(id);
-    if (!result) res.status(404).send({ message: "Clanak nije pronaden" });
+   
+    // Delete query
+    const [result] = await pool.query("DELETE FROM clanci WHERE id = ?", [id]);
 
-    res.status(200).send({ message: "Uspjesno obrisano" });
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "Clanak nije pronaden" });
+    }
+
+    return res.status(200).send({ message: "Uspjesno obrisano" });
   } catch (err) {
     console.log(err.message);
     res.status(500).send(`Zahtjev neuspjesan ${err.message}`);
   }
 });
+
 export default router;

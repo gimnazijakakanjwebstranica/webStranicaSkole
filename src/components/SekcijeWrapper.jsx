@@ -39,9 +39,11 @@ const SekcijeWrapper = () => {
       {loading ? (
         <Spinner />
       ) : (
-        data.map((item, index) => (
+        data.map((item, index) => {
+          const images = JSON.parse(item.images)
+          return(
           <div key={index}>
-            {item.images.map((imageUrl, i) => (
+            {images.map((imageUrl, i) => (
               <div key={i} className="text-center">
                 <img
                   src={imageUrl}
@@ -54,7 +56,7 @@ const SekcijeWrapper = () => {
               </div>
             ))}
           </div>
-        ))
+        )})
       )}
     </div>
   );
